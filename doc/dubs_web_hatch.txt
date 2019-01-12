@@ -1,0 +1,28 @@
+*dubs_web_hatch.txt*	For Vim version 7.4.	Last change: 2019 Jan 12
+
+Dubsacks Vim -- Web Hatch Plugin~
+
+WEB BROWSER TAB OPENER			*dubs-web-hatch*
+
+1. About This Plugin			|dubs-web-hatch-about|
+2. Web Hatch Commands		        |dubs-web-hatch-commands|
+
+==============================================================================
+1. About This Plugin			*dubs-web-hatch-about*
+
+This plugin provides a simple web browser tab opener
+to search on or load definition of selected text.
+
+==============================================================================
+2. Web Hatch Commands			*dubs-web-hatch-commands*
+
+Web Hatch Commands~
+
+- `<Leader>W` - Opens a browser tab and searches the word under the cursor
+(normal or insert mode) or the selected text (visual mode).
+
+- `<Leader>D` - Opens a browser tab and loads the definitions of the word
+under the cursor (normal or insert mode) or the selected text (visual mode).
+
+ vim:tw=78:ts=8:ft=help:norl:
+
