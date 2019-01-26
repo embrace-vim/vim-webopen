@@ -1,10 +1,13 @@
-Dubsacks Vim — Web Hatch
-========================
+############################
+Dubs Vim |em_dash| Web Hatch
+############################
+
+.. |em_dash| unicode:: 0x2014 .. em dash
 
 Simple web browser tab opener to search on or load definition of selected text.
 
 Usage
------
+=====
 
 ``<Leader>W`` - Opens a browser tab and searches the word under the cursor
 (normal or insert mode) or the selected text (visual mode).
@@ -13,7 +16,7 @@ Usage
 under the cursor (normal or insert mode) or the selected text (visual mode).
 
 Installation
-------------
+============
 
 Standard Pathogen installation:
 
