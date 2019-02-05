@@ -94,3 +94,31 @@ endfunction
 
 call <SID>place_binding_search_web_for_definition()
 
+" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+" Open selected URL
+" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+function! s:reset_binding_web_open_url()
+  silent! unmap <Leader>T
+  silent! iunmap <Leader>T
+  silent! vunmap <Leader>T
+endfunction
+
+function! s:place_binding_web_open_url()
+  call <SID>reset_binding_web_open_url()
+
+  " [lb]: Copied-paste of other binding fcns., except `define+` addition.
+  noremap <silent> <Leader>T
+    \ :!sensible-browser '<C-R><C-W>'
+    \ &> /dev/null<CR><CR>
+  inoremap <silent> <Leader>T
+    \ <C-O>:!sensible-browser '<C-R><C-W>'
+    \ &> /dev/null<CR><CR>
+  vnoremap <silent> <Leader>T :<C-U>
+    \ <CR>gvy
+    \ :!sensible-browser '<C-R>"'
+    \ &> /dev/null<CR><CR>
+endfunction
+
+call <SID>place_binding_web_open_url()
+
