@@ -15,27 +15,48 @@ Usage
 ``<Leader>D`` - Opens a browser tab and loads the definitions of the word
 under the cursor (normal or insert mode) or the selected text (visual mode).
 
-Installation
-============
+Install
+=======
 
-Standard Pathogen installation:
+Installation is easy using the packages feature (see ``:help packages``).
 
-.. code-block:: bash
-
-   cd ~/.vim/bundle/
-   git clone https://github.com/landonb/dubs_web_hatch.git
-
-Or, Standard submodule installation:
+To install the package so that it will automatically load on Vim startup,
+use a ``start`` directory, e.g.,
 
 .. code-block:: bash
 
-   cd ~/.vim/bundle/
-   git submodule add https://github.com/landonb/dubs_web_hatch.git
+    mkdir -p ~/.vim/pack/landonb/start
+    cd ~/.vim/pack/landonb/start
 
-Online help:
+If you want to test the package first, make it optional instead
+(see ``:help pack-add``):
+
+.. code-block:: bash
+
+    mkdir -p ~/.vim/pack/landonb/opt
+    cd ~/.vim/pack/landonb/opt
+
+Clone the project to the desired path:
+
+.. code-block:: bash
+
+    git clone https://github.com/landonb/dubs_web_hatch.git
+
+If you installed to the optional path, tell Vim to load the package:
+
+.. code-block:: vim
+
+   :packadd! dubs_web_hatch
+
+Just once, tell Vim to build the online help:
 
 .. code-block:: vim
 
    :Helptags
+
+Then whenever you want to reference the help from Vim, run:
+
+.. code-block:: vim
+
    :help dubs-web-hatch
 
