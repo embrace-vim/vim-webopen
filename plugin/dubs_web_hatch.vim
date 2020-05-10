@@ -27,6 +27,13 @@ if exists("g:plugin_dubs_web_hatch") || &cp
 endif
 let g:plugin_dubs_web_hatch = 1
 
+" MAYBE/2020-05-10 14:04: Add g:global_variable for choosing URL opener,
+" or make distro-specific choice, e.g.,
+"
+"   if (match(system('cat /proc/version'), 'Ubuntu') >= 0)
+"     let g:dubs_web_hatch_open = 'sensible-browser'
+"   ...
+
 " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 " Search Web for Selection, or Word Under Cursor
 " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -98,7 +105,71 @@ call <SID>place_binding_search_web_for_definition()
 " Open selected URL
 " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+" - The following web_open_url() function is inspired by:
+"       https://stackoverflow.com/a/53817071
+"   albeit I fixed an issue with shellescape being called before checking for
+"   the empty string (which shellescape would put quotes around, so it'd no
+"   longer be empty).
+"   - I also swapped `open` for `sensible-browser`. `open` is for macOS. (And
+"     `xdg-open` is more for Linux, but `sensible-browser` is more literal.)
+" - That SO post was (possibly) inspired by (or at least referenced from):
+"      https://stackoverflow.com/a/9459366
+"   which tells users to try Vim's builtin `gx`, but I have issues with `gx`.
+" - See also another plugin I found:
+"       https://github.com/henrik/vim-open-url
+"   Which uses more rebost regex as described by the Markdown author:
+"       https://daringfireball.net/2010/07/improved_regex_for_matching_urls
+"   But so far I've run across no limitations with the simpler regex used here.
+" - The (an)other plugin also claims to work when two URLs are on the same row, e.g.,
+"       " http://example.com/#foo and http://example.com/?foo=bar#baz "
+"   but when I tested, all I saw was the line being echoed, and nothing more.
+"   - With the code herein, if 2 URLs are on the same line, the first is opened.
+"   - Which is fine for my use case: I have URLs in notes files, but never two
+"     on the same line, which -- without a magic open-URL function -- is useful
+"     for copying a URL that you intend to paste to a browser, as you can just
+"     copy the whole line (including newline) with a few keystrokes (and the
+"     browser will strip leading and trailing whitespace when you paste).
+"   - You also have to set the opener with the (an)other plugin, e.g.,
+"       let g:open_url_browser="xdg-open"
+"     which is probably something I could adapt here (because I think Linux
+"     and macOS support `sensible-browser`, but not Windows).
+" - There's also the Vim builtin `gx`, but I have issues with `gx` always
+"   calling `wget` on the URL, no matter how I configure it.
+"   - For instance, even when I specified the browser opener:
+"       let g:netrw_browsex_viewer = "sensible-browser"
+"     `gx` would still `wget` the resource first, and then open the temporary
+"     download file path in my browser. Heh?!
+"     - I also tried other vectors:
+"       - This wgets the URL under cursor to /tmp/some-dir/, then replaces
+"         my open file in Vim with a blank file (and Ctrl-j doesn't go back!):
+"           let g:netrw_browsex_viewer = "xdg-open"
+"       - This opens the downloaded resource to a GUI text editor (not Vim):
+"           let g:netrw_browsex_viewer = "setsid xdg-open"
+"       - This opens the dowloaded resource in my browser, with a temporary path,
+"         e.g., file:///tmp/vuzpUag/116, and also replaces current Vim buffer with
+"         a new one (closing/wiping the previous buffer, so Ctrl-J does nothing):
+"           let g:netrw_browsex_viewer = "sensible-browser"
+" - This leaves only one feature that the (an)other plugin offers, which is
+"   to handle special URLs, like Spotify, e.g.,
+"       spotify:track:6JEK0CvvjDjjMUBFoXShNZ
+"   which is novel, but not a feature that I see myself starting to use.
+function! s:web_open_url()
+  let s:uri = matchstr(getline("."), '[a-z]*:\/\/[^ >,;()]*')
+  if s:uri != ""
+    "  echom "Found URI: " . s:uri
+    " Add shell-appropriate quotes around the URL.
+    let s:uri = shellescape(s:uri, 1)
+    silent exec "!sensible-browser " . s:uri
+    " (lb): SO post calls redraw, but seems unnecessary.
+    "    :redraw!
+  else
+    echo "No URI found in line."
+  endif
+endfunction
+
 function! s:reset_binding_web_open_url()
+  silent! unmap gW
+
   silent! unmap <Leader>T
   silent! iunmap <Leader>T
   silent! vunmap <Leader>T
@@ -107,17 +178,21 @@ endfunction
 function! s:place_binding_web_open_url()
   call <SID>reset_binding_web_open_url()
 
-  " [lb]: Copied-paste of other binding fcns., except `define+` addition.
-  noremap <silent> <Leader>T
-    \ :!sensible-browser '<C-R><C-W>'
-    \ &> /dev/null<CR><CR>
-  inoremap <silent> <Leader>T
-    \ <C-O>:!sensible-browser '<C-R><C-W>'
-    \ &> /dev/null<CR><CR>
-  vnoremap <silent> <Leader>T :<C-U>
-    \ <CR>gvy
-    \ :!sensible-browser '<C-R>"'
-    \ &> /dev/null<CR><CR>
+  " 2020-05-10: I (finally) learned about Vim's builtin `gf` (and `gF`), and now
+  " I'm thinking that maybe `gW` makes sense ("go Web"), which is not mapped by Vim.
+  " - So trying gW, but leaving historic \T that's been wired for a spell (albeit broken).
+  "   However, the <Leader>T hooks are still nice to have because they work in all modes.
+  nnoremap gW :call <SID>web_open_url()<CR>
+
+  nnoremap <Leader>T <SID>web_open_url()<CR>
+  inoremap <Leader>T <C-O>:call <SID>web_open_url()<CR>
+  " Note that we must escape the shell command argument, e.g., if you select this URL:
+  "   http://example.com/#foo
+  " a simple mapping like:
+  "  vnoremap <Leader>T y:!sensible-browser '<C-R>"'<CR>
+  " will fail on the pound sign/octothorpe/hash symbol, complaining
+  "   E499: Empty file name for '%' or '#', only works with ":p:h"
+  vnoremap <silent> <Leader>T y:execute "!sensible-browser " . shellescape('<C-R>"', 1)<CR>
 endfunction
 
 call <SID>place_binding_web_open_url()
