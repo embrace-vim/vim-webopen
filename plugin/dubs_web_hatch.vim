@@ -1,4 +1,4 @@
-" Project Page: https://github.com/landonb/dubs_web_hatch
+" Project Page: https://github.com/landonb/dubs_web_hatch#🐣
 " License: GPLv3
 " vim:tw=0:ts=2:sw=2:et:norl:ft=vim
 " ----------------------------------------------------------------------------
@@ -21,6 +21,9 @@
 " or write Free Software Foundation, Inc., 51 Franklin Street,
 "                     Fifth Floor, Boston, MA 02110-1301, USA.
 " ===================================================================
+
+" YOU: Uncomment and <F9> to source/reload.
+"  silent! unlet g:plugin_dubs_web_hatch
 
 if exists("g:plugin_dubs_web_hatch") || &cp
   finish
@@ -105,6 +108,126 @@ call <SID>place_binding_search_web_for_definition()
 " Open selected URL
 " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+" https://stackoverflow.com/questions/4976776/how-to-get-path-to-the-current-vimscript-being-executed
+" Path to this script's directory: get absolute path; resolve symlinks; get directory name.
+" - (lb) Running at script/source level, because if I <F9> reload this script,
+"        I see different (incorrect) path (of another plugin,
+"        ~/.vim/pack/landonb/start/vim-netrw-link-resolve/net).
+let s:dubs_web_hatch_plugin_path = fnamemodify(resolve(expand('<sfile>:p')), ':h')
+
+function! s:macOS_which_browser()
+  "  echom s:dubs_web_hatch_plugin_path
+  " 2020-09-01: (lb): Not worrying about path separator.
+  "             (Vim handles, right? That, or '/' works on Windows.)
+  " Ref: fnamemodify(..., ':h'): See: :h filename-modifiers.
+  let l:plugbin = fnamemodify(s:dubs_web_hatch_plugin_path, ':h') . '/' . 'bin'
+  "  echom l:plugbin
+  let l:whicher = l:plugbin . '/' . 'macOS-which-browser'
+  " MEH: On Windows, use 2>NUL instead.
+  let l:syscmmd = l:whicher . ' 2>/dev/null'
+  "  echom l:whicher
+  let l:handler = system(l:syscmmd)
+  " Hrmm, don't see this set like I'd expect on Linux:
+  "   echom v:shell_error
+  "  echom l:handler
+  return l:handler
+endfunction
+
+" function! MacOS_which_browser()
+"   call <SID>macOS_which_browser()
+" endfunction
+
+function! s:default_browser()
+  if has('macunix')
+    let l:handler = <SID>macOS_which_browser()
+    if l:handler == "com.google.chrome"
+      return "chrome"
+    elseif l:handler == "org.mozilla.firefox"
+      return "firefox"
+    elseif l:handler == "com.apple.safari"
+      " /Applications/Sarari.app/Contents/MacOS/Safari
+      " Note that Safari (a Cocoa app, not a CLI app) does not accept arguments.
+      return "safari"
+    elseif l:handler == "com.googlecode.iterm2"
+      return ""
+    endif
+  else
+    " Linux.
+    " (lb): `echo $BROWSER` shows nothing, so ask sensible-browser, I suppose.
+    let l:handler = system('sensible-browser --version')
+    " Use \(^\|\n\) because Chromium's --version's first line is 'Using PPAPI flash.'
+    if l:handler =~ '\(^\|\n\)Google Chrome '
+      " /usr/bin/google-chrome-stable
+      return "chrome"
+    elseif l:handler =~ '\(^\|\n\)Chromium '
+      " /usr/bin/chromium-browser
+      return "chrome"
+    elseif l:handler =~ '\(^\|\n\)Mozilla Firefox '
+      " /usr/bin/firefox
+      return "firefox"
+    endif
+  endif
+  return ""
+endfunction
+
+function! s:browopts_incognito(which_browser, options, incognito)
+  let l:options = a:options
+  if a:incognito == 1
+    if a:which_browser == 'chrome'
+      let l:options = l:options . "--incognito "
+    elseif a:which_browser == 'firefox'
+      let l:options = l:options . "--private-window "
+    endif
+  endif
+  return l:options
+endfunction
+
+function! s:browopts_new_window(which_browser, options)
+  let l:options = a:options
+  if !exists("g:dubs_web_hatch_use_tab") || g:dubs_web_hatch_use_tab == 0
+    if a:which_browser == 'chrome' || a:which_browser == 'firefox'
+      let l:options = l:options . "--new-window "
+    endif
+  endif
+  return l:options
+endfunction
+
+" - Sending arguments to macOS browser requires two options to `open`.
+"   - A basic `open -a 'Google Chrome' URL` opens a URL in new tab of
+"     existing window, akin to a basic `sensible-browser URL` on Linux.
+"   - The `open` has an `--args` option to precede pass-through options,
+"     but you also need to add `-n` so open tries to open a new Chrome
+"     instance, which Chrome will capture and kill, and pass control
+"     back to the running instance, "but this is necessary to force
+"     arguments to be read", according and thanks to georgegarside.
+"     E.g.,
+"       open -na "Google Chrome" --args --new-window URL
+"     https://apple.stackexchange.com/a/305902/388088
+function! s:browser_cmd(which_browser, options)
+  let l:browpener = ""
+  if has('macunix')
+    if a:options == ""
+      let l:browpener = "open -a"
+    else
+      " See comments before function, necessary for --args to be effective.
+      let l:browpener = "open -na"
+    endif
+    if a:which_browser == 'chrome'
+      let l:browpener = l:browpener . " 'Google Chrome'"
+    elseif a:which_browser == 'firefox'
+      let l:browpener = l:browpener . " 'Firefox'"
+    elseif a:which_browser == 'safari'
+      let l:browpener = l:browpener . " 'Safari'"
+    endif
+    if a:options != ""
+      let l:browpener = l:browpener . " --args"
+    endif
+  else
+    let l:browpener = "sensible-browser"
+  endif
+  return l:browpener
+endfunction
+
 " - The following web_open_url() function is inspired by:
 "       https://stackoverflow.com/a/53817071
 "   albeit I fixed an issue with shellescape being called before checking for
@@ -153,13 +276,24 @@ call <SID>place_binding_search_web_for_definition()
 "   to handle special URLs, like Spotify, e.g.,
 "       spotify:track:6JEK0CvvjDjjMUBFoXShNZ
 "   which is novel, but not a feature that I see myself starting to use.
-function! s:web_open_url()
-  let s:uri = matchstr(getline("."), '[a-z]*:\/\/[^ >,;()]*')
-  if s:uri != ""
-    "  echom "Found URI: " . s:uri
+function! s:web_open_url(incognito)
+  let l:uri = matchstr(getline("."), '[a-z]*:\/\/[^ >,;()]*')
+  if l:uri != ""
+    "  echom "Found URI: " . l:uri
+
+    let l:which_browser = <SID>default_browser()
+
     " Add shell-appropriate quotes around the URL.
-    let s:uri = shellescape(s:uri, 1)
-    silent exec "!sensible-browser " . s:uri
+    let l:uri = shellescape(l:uri, 1)
+
+    " Add private browsing flag, perhaps.
+    let l:options = ""
+    let l:options = <SID>browopts_incognito(l:which_browser, l:options, a:incognito)
+    let l:options = <SID>browopts_new_window(l:which_browser, l:options)
+
+    let l:browpener = <SID>browser_cmd(l:which_browser, options)
+
+    silent exec "!" . l:browpener . " " . l:options . l:uri
     " (lb): SO post calls redraw, but seems unnecessary.
     "    :redraw!
   else
@@ -175,6 +309,11 @@ function! s:reset_binding_web_open_url()
   silent! vunmap <Leader>T
 endfunction
 
+function! s:reset_binding_web_open_url_incognito()
+  " 2020-09-01: (lb): Unbound/Available: gS, g!. Taken: gP, g@, g#...
+  silent! unmap g!
+endfunction
+
 function! s:place_binding_web_open_url()
   call <SID>reset_binding_web_open_url()
 
@@ -182,10 +321,12 @@ function! s:place_binding_web_open_url()
   " I'm thinking that maybe `gW` makes sense ("go Web"), which is not mapped by Vim.
   " - So trying gW, but leaving historic \T that's been wired for a spell (albeit broken).
   "   However, the <Leader>T hooks are still nice to have because they work in all modes.
-  nnoremap gW :call <SID>web_open_url()<CR>
+  "   2020-09-01: \T does not open URL under cursor, but it does a selection, useful if
+  "   the URL you want to open does not look like one.
+  nnoremap gW :call <SID>web_open_url(0)<CR>
 
-  nnoremap <Leader>T <SID>web_open_url()<CR>
-  inoremap <Leader>T <C-O>:call <SID>web_open_url()<CR>
+  nnoremap <Leader>T <SID>web_open_url(0)<CR>
+  inoremap <Leader>T <C-O>:call <SID>web_open_url(0)<CR>
   " Note that we must escape the shell command argument, e.g., if you select this URL:
   "   http://example.com/#foo
   " a simple mapping like:
@@ -196,4 +337,12 @@ function! s:place_binding_web_open_url()
 endfunction
 
 call <SID>place_binding_web_open_url()
+
+function! s:place_binding_web_open_url_incognito()
+  call <SID>reset_binding_web_open_url_incognito()
+
+  nnoremap g! :call <SID>web_open_url(1)<CR>
+endfunction
+
+call <SID>place_binding_web_open_url_incognito()
 

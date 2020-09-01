@@ -9,11 +9,18 @@ Simple web browser tab opener to search on or load definition of selected text.
 Usage
 =====
 
-``<Leader>W`` - Opens a browser tab and searches the word under the cursor
+``<Leader>W`` - Opens a new browser window and searches the word under the cursor
 (normal or insert mode) or the selected text (visual mode).
 
-``<Leader>D`` - Opens a browser tab and loads the definitions of the word
+``<Leader>D`` - Opens a new browser window and loads the definitions of the word
 under the cursor (normal or insert mode) or the selected text (visual mode).
+
+- Note that each command opens a new browser tab in new window.
+
+  To instead prefer opening a new tab in an existing window,
+  set the following global variable to nonzero, e.g.,::
+
+    g:dubs_web_hatch_use_tab = 1
 
 Install
 =======

@@ -1,0 +1,60 @@
+#!/bin/sh
+# vim:tw=0:ts=2:sw=2:et:norl:ft=sh
+# Author: Landon Bouma (landonb &#x40; retrosoft &#x2E; com)
+# Project: https://github.com/landonb/dubs_web_hatch#🐣
+# License: GPLv3
+
+macOS_which_browser () {
+  local proplist="${HOME}/Library/Preferences/com.apple.LaunchServices/com.apple.launchservices.secure.plist"
+  # Guard clause: Ensure Property List exists (and, by extension, is-macOS).
+  if [ ! -f "${proplist}" ]; then
+    >&2 /usr/bin/env echo "ERROR: Not found: LaunchServices Property List: ‘${proplist}’"
+    return 1
+  fi
+
+  # Guard clause: Ensure `jq` installed.
+  if ! command -v jq > /dev/null 2>&1; then
+    >&2 /usr/bin/env echo "ERROR: Missing ‘jq’: Try: ‘brew install jq’"
+    return 1
+  fi
+
+  # Copy the Property List to a temporary location, before transforming it.
+  local tempfile="$(mktemp -t com.apple.launchservices.secure.plist)"
+  /usr/bin/env cp -f "${proplist}" "${tempfile}"
+
+  # Convert the Property List to JSON.
+  plutil -convert json "${tempfile}"
+
+  # Locate both the 'http' or 'https' handlers.
+  local handler_http=$( \
+    cat "${tempfile}" | \
+      /usr/bin/env jq -r '.LSHandlers[]  | select(.LSHandlerURLScheme == "http") | .LSHandlerRoleAll' \
+    )
+  local handler_https=$( \
+    cat "${tempfile}" | \
+      /usr/bin/env jq -r '.LSHandlers[]  | select(.LSHandlerURLScheme == "https") | .LSHandlerRoleAll' \
+    )
+  /usr/bin/env echo -n "${handler_http}"
+  # (lb): I'd expect the handlers to match, but perhaps not.
+  if [ "${handler_http}" != "${handler_https}" ]; then
+    /usr/bin/env echo -n " ${handler_https}"
+  fi
+  return 0
+}
+
+# +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #
+
+this_file_name="macOS-which-browser"
+shell_sourced () { [ "$(basename -- "$0")" != "${this_file_name}" ]; }
+# Note that bash_sourced only meaningful if shell_sourced is true.
+bash_sourced () { declare -p FUNCNAME > /dev/null 2>&1; }
+
+if ! shell_sourced; then
+  macOS_which_browser "${@}"
+else
+  bash_sourced && export -f macOS_which_browser
+  unset this_file_name
+  unset -f shell_sourced
+  unset -f bash_sourced
+fi
+
