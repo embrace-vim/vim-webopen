@@ -4,6 +4,10 @@
 # Project: https://github.com/landonb/dubs_web_hatch#🐣
 # License: GPLv3
 
+# 2021-01-28: SNYC_ME: See related functionality (POSIX script):
+#
+#   https://github.com/landonb/sh-sensible-open#☔
+
 macOS_which_browser () {
   local proplist="${HOME}/Library/Preferences/com.apple.LaunchServices/com.apple.launchservices.secure.plist"
   # Guard clause: Ensure Property List exists (and, by extension, is-macOS).
