@@ -22,7 +22,9 @@
 "                     Fifth Floor, Boston, MA 02110-1301, USA.
 " ===================================================================
 
-" YOU: Uncomment and <F9> to source/reload.
+" YOU: Uncomment next 'unlet', then <F9> to reload this file.
+"      (Iff: https://github.com/landonb/vim-source-reloader)
+"
 "  silent! unlet g:plugin_dubs_web_hatch
 
 if exists("g:plugin_dubs_web_hatch") || &cp
@@ -201,8 +203,12 @@ endfunction
 "     back to the running instance, "but this is necessary to force
 "     arguments to be read", according and thanks to georgegarside.
 "     E.g.,
-"       open -na "Google Chrome" --args --new-window URL
+"       open -na 'Google Chrome' --args --new-window <location>
 "     https://apple.stackexchange.com/a/305902/388088
+"   - Note that the application is necessary, e.g.,
+"       open -n --args --new-window <location>
+"     will not work as intended.
+"     - Note also order matters: Put <location> last.
 function! s:browser_cmd(which_browser, options)
   let l:browpener = ""
   if has('macunix')
@@ -279,9 +285,11 @@ endfunction
 function! s:web_open_url(incognito)
   let l:uri = matchstr(getline("."), '[a-z]*:\/\/[^ >,;()]*')
   if l:uri != ""
-    "  echom "Found URI: " . l:uri
-
     let l:which_browser = <SID>default_browser()
+
+    " echom 'Open URL: ' . l:uri
+    "   \ . ' / incognito: ' . a:incognito
+    "   \ . ' / which_browser: ' . l:which_browser
 
     " Add shell-appropriate quotes around the URL.
     let l:uri = shellescape(l:uri, 1)
@@ -293,13 +301,46 @@ function! s:web_open_url(incognito)
 
     let l:browpener = <SID>browser_cmd(l:which_browser, options)
 
+    " echom 'silent exec ' . '!' . l:browpener . ' ' . l:options . l:uri
+
     silent exec "!" . l:browpener . " " . l:options . l:uri
-    " (lb): SO post calls redraw, but seems unnecessary.
+
+    " (lb): SO post (53817071) calls redraw, but seems unnecessary.
     "    :redraw!
   else
     echo "No URI found in line."
   endif
 endfunction
+
+" +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ "
+
+" MEH/2021-01-28: I ported previous macOS browser functionality to a new
+" shell project, found at https://github.com/landonb/sh-sensible-open#☔
+" but I'd rather not force plugin users to have to install that command.
+" So rather than DRY this code (the functionality is the same, although
+" one is Vim and the other is a POSIX command script), we'll keep both
+" the code above and the new shell command. / So just realize (if you
+" are me and the one maintaining these codebases) that this code is not
+" DRY, and any changes you make here you might want to port to t'other.
+"
+" For the novelty of it, here's how we could simplify this plugin if we
+" replaced the complicated web_open_url above with a simpler call to the
+" shell command:
+"
+"   function! s:web_open_url(incognito)
+"     let l:uri = matchstr(getline('.'), '[a-z]*:\/\/[^ >,;()]*')
+"     if l:uri != ''
+"       let l:uri = shellescape(l:uri, 1)
+"       silent exec '!' . system('sensible-open' . ' ' . l:uri)
+"       " Or if we need the raw command string for some reason:
+"       "   let l:opencmd = system('_sensibleopen-format-open-command' . ' ' . l:uri)
+"       "   exec '!' . l:opencmd
+"     else
+"       echo 'No URI found in line.'
+"     endif
+"   endfunction
+
+" +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ "
 
 function! s:reset_binding_web_open_url()
   silent! unmap gW
