@@ -23,7 +23,7 @@ macOS_which_browser () {
   fi
 
   # Copy the Property List to a temporary location, before transforming it.
-  local tempfile="$(mktemp -t com.apple.launchservices.secure.plist)"
+  local tempfile="$(mktemp -t sh-sensible-open--com.apple.launchservices.secure.plist--XXXXX)"
   /usr/bin/env cp -f "${proplist}" "${tempfile}"
 
   # Convert the Property List to JSON.
