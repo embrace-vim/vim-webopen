@@ -282,34 +282,48 @@ endfunction
 "   to handle special URLs, like Spotify, e.g.,
 "       spotify:track:6JEK0CvvjDjjMUBFoXShNZ
 "   which is novel, but not a feature that I see myself starting to use.
-function! s:web_open_url(incognito)
-  let l:uri = matchstr(getline("."), '[a-z]*:\/\/[^ >,;()]*')
-  if l:uri != ""
-    let l:which_browser = <SID>default_browser()
-
-    " echom 'Open URL: ' . l:uri
-    "   \ . ' / incognito: ' . a:incognito
-    "   \ . ' / which_browser: ' . l:which_browser
-
-    " Add shell-appropriate quotes around the URL.
-    let l:uri = shellescape(l:uri, 1)
-
-    " Add private browsing flag, perhaps.
-    let l:options = ""
-    let l:options = <SID>browopts_incognito(l:which_browser, l:options, a:incognito)
-    let l:options = <SID>browopts_new_window(l:which_browser, l:options)
-
-    let l:browpener = <SID>browser_cmd(l:which_browser, options)
-
-    " echom 'silent exec ' . '!' . l:browpener . ' ' . l:options . l:uri
-
-    silent exec "!" . l:browpener . " " . l:options . l:uri
-
-    " (lb): SO post (53817071) calls redraw, but seems unnecessary.
-    "    :redraw!
-  else
-    echo "No URI found in line."
+function! s:web_open_url(suggested_uri, incognito)
+  let l:uri = s:use_suggested_uri_or_parse_line(a:suggested_uri)
+  if l:uri == ""
+    echom "No URI found in line."
+    return
   endif
+
+  call s:open_browser_window(l:uri, a:incognito)
+endfunction
+
+function! s:use_suggested_uri_or_parse_line(uri)
+  if a:uri != ""
+    return a:uri
+  endif
+
+  return matchstr(getline("."), '[a-z]*:\/\/[^ >,;()]*')
+endfunction
+
+function! s:open_browser_window(uri, incognito)
+  let l:which_browser = <SID>default_browser()
+
+  " echom 'Open URL: ' . l:uri
+  "   \ . ' / incognito: ' . a:incognito
+  "   \ . ' / which_browser: ' . l:which_browser
+
+  " Add shell-appropriate quotes around the URL.
+  let l:uri = shellescape(a:uri, 1)
+
+  " Add private browsing flag, perhaps, depending on which command was called.
+  " Add new window flag, usually, unless disabled via g:dubs_web_hatch_use_tab.
+  let l:options = ""
+  let l:options = <SID>browopts_incognito(l:which_browser, l:options, a:incognito)
+  let l:options = <SID>browopts_new_window(l:which_browser, l:options)
+
+  let l:browpener = <SID>browser_cmd(l:which_browser, options)
+
+  " echom 'silent exec ' . '!' . l:browpener . ' ' . l:options . l:uri
+
+  silent exec "!" . l:browpener . " " . l:options . l:uri
+
+  " (lb): SO post (53817071) calls redraw, but seems unnecessary.
+  "    :redraw!
 endfunction
 
 " +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ "
@@ -364,10 +378,10 @@ function! s:place_binding_web_open_url()
   "   However, the <Leader>T hooks are still nice to have because they work in all modes.
   "   2020-09-01: \T does not open URL under cursor, but it does a selection, useful if
   "   the URL you want to open does not look like one.
-  nnoremap gW :call <SID>web_open_url(0)<CR>
+  nnoremap gW :call <SID>web_open_url('', 0)<CR>
 
-  nnoremap <Leader>T <SID>web_open_url(0)<CR>
-  inoremap <Leader>T <C-O>:call <SID>web_open_url(0)<CR>
+  nnoremap <Leader>T :call <SID>web_open_url('', 0)<CR>
+  inoremap <Leader>T <C-O>:call <SID>web_open_url('', 0)<CR>
   " Note that we must escape the shell command argument, e.g., if you select this URL:
   "   http://example.com/#foo
   " a simple mapping like:
@@ -382,7 +396,7 @@ call <SID>place_binding_web_open_url()
 function! s:place_binding_web_open_url_incognito()
   call <SID>reset_binding_web_open_url_incognito()
 
-  nnoremap g! :call <SID>web_open_url(1)<CR>
+  nnoremap g! :call <SID>web_open_url('', 1)<CR>
 endfunction
 
 call <SID>place_binding_web_open_url_incognito()
