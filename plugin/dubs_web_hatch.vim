@@ -58,20 +58,17 @@ function! s:place_binding_search_web_for_selection()
   " URL, rather than send to default search engine, when invoked thru
   " sensible-browser (as opposed to typing a term in the location bar
   " and the browser deciding if it is a URL or if it is search text).
-  noremap <silent> <Leader>W
-    \ :!sensible-browser 'https://www.google.com/search?q=<C-R><C-W>'
-    \ &> /dev/null<CR><CR>
+  noremap <Leader>W
+    \ :call <SID>web_open_url('https://www.google.com/search?q=<C-R><C-W>', 0)<CR>
   inoremap <silent> <Leader>W
-    \ <C-O>:!sensible-browser 'https://www.google.com/search?q=<C-R><C-W>'
-    \ &> /dev/null<CR><CR>
+    \ <C-O>:call <SID>web_open_url('https://www.google.com/search?q=<C-R><C-W>', 0)<CR>
   " Interesting: C-U clears the command line, which contains cruft, e.g., '<,'>
   " gv selects the previous Visual area.
   " y yanks the selected text into the default register.
   " <Ctrl-R>" puts the yanked text into the command line.
   vnoremap <silent> <Leader>W :<C-U>
     \ <CR>gvy
-    \ :!sensible-browser 'https://www.google.com/search?q=<C-R>"'
-    \ &> /dev/null<CR><CR>
+    \ :<C-U>call <SID>web_open_url('https://www.google.com/search?q=<C-R>"', 0)<CR>
 endfunction
 
 call <SID>place_binding_search_web_for_selection()
@@ -93,15 +90,12 @@ function! s:place_binding_search_web_for_definition()
 
   " [lb]: Copied-paste of other binding fcns., except `define+` addition.
   noremap <silent> <Leader>D
-    \ :!sensible-browser 'https://www.google.com/search?q=define+<C-R><C-W>'
-    \ &> /dev/null<CR><CR>
+    \ :call <SID>web_open_url('https://www.google.com/search?q=define+<C-R><C-W>', 0)<CR>
   inoremap <silent> <Leader>D
-    \ <C-O>:!sensible-browser 'https://www.google.com/search?q=define+<C-R><C-W>'
-    \ &> /dev/null<CR><CR>
+    \ <C-O>:call <SID>web_open_url('https://www.google.com/search?q=define+<C-R><C-W>', 0)<CR>
   vnoremap <silent> <Leader>D :<C-U>
     \ <CR>gvy
-    \ :!sensible-browser 'https://www.google.com/search?q=define+<C-R>"'
-    \ &> /dev/null<CR><CR>
+    \ :<C-U>call <SID>web_open_url('https://www.google.com/search?q=define+<C-R>"', 0)<CR>
 endfunction
 
 call <SID>place_binding_search_web_for_definition()
