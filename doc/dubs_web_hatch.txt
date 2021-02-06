@@ -1,4 +1,4 @@
-*dubs_web_hatch.txt*	For Vim version 7.4.	Last change: 2019 Jan 12
+*dubs_web_hatch.txt*	For Vim version 7.4.	Last change: 2021 Feb 06
 
 Dubsacks Vim -- Web Hatch Plugin~
 
@@ -6,23 +6,91 @@ WEB BROWSER TAB OPENER			*dubs-web-hatch*
 
 1. About This Plugin			|dubs-web-hatch-about|
 2. Web Hatch Commands		        |dubs-web-hatch-commands|
+3. Web Hatch Configuration	        |dubs-web-hatch-configuration|
 
 ==============================================================================
 1. About This Plugin			*dubs-web-hatch-about*
 
-This plugin provides a simple web browser tab opener
-to search on or load definition of selected text.
+Simple URL opener with search and word definition options.
+
+At its core, opens a location in the default browser.
+
+Can also search the web or try to define something.
 
 ==============================================================================
 2. Web Hatch Commands			*dubs-web-hatch-commands*
 
 Web Hatch Commands~
 
-- `<Leader>W` - Opens a browser tab and searches the word under the cursor
-(normal or insert mode) or the selected text (visual mode).
+							*gW*
+gW			Opens a new browser window with the location of the
+			URL under the cursor. Similar to Vim's builtin "gf"
+			and "gF" commands that open the file path found under
+			the cursor. Works from normal mode.
 
-- `<Leader>D` - Opens a browser tab and loads the definitions of the word
-under the cursor (normal or insert mode) or the selected text (visual mode).
+							*gW*
+g!			Like "gW", but opens location in an incognito (aka
+			private) browser window. Works from normal mode.
 
- vim:tw=78:ts=8:ft=help:norl:
+							*<Leader>W*
+<Leader>W		Opens a browser tab and searches the word under the
+			cursor (normal or insert mode) or the selected text
+			(visual mode).
+
+							*<Leader>D*
+<Leader>D		Opens a browser tab and loads the definitions of the
+			word under the cursor (normal or insert mode) or the
+			selected text (visual mode).
+
+==============================================================================
+3. Web Hatch Configuration		*dubs-web-hatch-configuration*
+
+Default Browser~
+
+On Linux (Debian), this plugin calls `sensible-browser --version` to
+determine which browser to use.
+
+- Use the `$BROWSER` environ to set your default browser.
+
+  - E.g., include this in your `~/.bashrc` if you prefer Chrome:
+
+      `export BROWSER=/usr/bin/google-chrome`
+
+  - For the best documentation on `sensible-browser`, see the source,
+    which you might find at:
+
+      `/usr/bin/sensible-browser`
+
+On macOS, this plugin reads the user's `LaunchServices` property list
+looking for the default browser to use.
+
+- Run the browser you want to be the default, and look for an option
+  within the browser to set it as the default.
+
+Please feel free to open a pull request to add support for additional OSes.
+
+Tab or Window~
+
+By default, each command opens a new browser tab in new window.
+
+- To instead prefer opening a new tab in an existing window,
+  set the following global variable to nonzero, e.g.,:
+
+    `g:dubs_web_hatch_use_tab = 1`
+
+Supported Browsers~
+
+This plugin works with the following browsers:
+
+- On Debian: Google Chrome, Chromium, and Mozilla Firefox.
+
+- On macOS: Google Chrome, Mozilla Firefox, and Apple Safari.
+
+Note that Safari does not accept command line arguments, so it does not
+respect tab vs. window, nor can it open a location in incognito mode.
+
+Please feel free to open a pull request to add support for additional browsers.
+
+
+ vim:tw=78:ts=8:ft=help:norl:noet:
 
