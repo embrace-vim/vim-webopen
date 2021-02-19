@@ -316,8 +316,21 @@ function! s:open_browser_window(uri, incognito)
 
   silent exec "!" . l:browpener . " " . l:options . l:uri
 
-  " (lb): SO post (53817071) calls redraw, but seems unnecessary.
-  "    :redraw!
+  " Even though 'silent' was used, when Vim is run in the terminal via EDITOR
+  " (I notice it running Vim from dob), the screen goes blank. You might see
+  " a blip of text, e.g., from sensible-browser, which says:
+  "   Opening in existing browser session.
+  " And without 'silent', you'll see the previous message, and also a prompt:
+  "   Press ENTER or type command to continue
+  " But with the silent, there's no prompt, and the message whizzes by so
+  " fast sometimes you see it, and sometimes you don't. But you're always
+  " left with a blank screen.
+  " - If you insert text on the blank screen, you'll overwrite the existing
+  "   buffer, and existing text will reappear as you type.
+  " - But you're also still in normal mode, and pressing either
+  "   Ctrl-L or `:redraw!` will fix things. And note you need the '!',
+  "   which clears the screen first before redrawing, like, total reset.
+  redraw!
 endfunction
 
 " +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ "
