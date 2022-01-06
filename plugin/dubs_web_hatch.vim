@@ -196,6 +196,16 @@ function! s:browopts_new_window(which_browser, options)
   return l:options
 endfunction
 
+function! s:browopts_profile_dir(which_browser, options)
+  let l:options = a:options
+  if !exists("g:dubs_web_hatch_mru_profile") || g:dubs_web_hatch_mru_profile == 0
+    if a:which_browser == 'chrome'
+      let l:options = l:options . "--profile-directory=Default "
+    endif
+  endif
+  return l:options
+endfunction
+
 " - Sending arguments to macOS browser requires two options to `open`.
 "   - A basic `open -a 'Google Chrome' URL` opens a URL in new tab of
 "     existing window, akin to a basic `sensible-browser URL` on Linux.
@@ -312,11 +322,13 @@ function! s:open_browser_window(uri, incognito)
   " Add shell-appropriate quotes around the URL.
   let l:uri = shellescape(a:uri, 1)
 
-  " Add private browsing flag, perhaps, depending on which command was called.
-  " Add new window flag, usually, unless disabled via g:dubs_web_hatch_use_tab.
   let l:options = ""
+  " Add private browsing flag, perhaps, depending on which command was called.
   let l:options = <SID>browopts_incognito(l:which_browser, l:options, a:incognito)
+  " Add new window flag, usually, unless disabled via g:dubs_web_hatch_use_tab.
   let l:options = <SID>browopts_new_window(l:which_browser, l:options)
+  " Tell Chrome to use default user profile, unless g:dubs_web_hatch_mru_profile.
+  let l:options = <SID>browopts_profile_dir(l:which_browser, l:options)
 
   let l:browpener = <SID>browser_cmd(l:which_browser, options)
 
