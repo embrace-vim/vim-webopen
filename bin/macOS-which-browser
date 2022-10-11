@@ -60,7 +60,7 @@ shell_sourced () { [ "$(basename -- "$0")" != "${this_file_name}" ]; }
 bash_sourced () { declare -p FUNCNAME > /dev/null 2>&1; }
 
 if ! shell_sourced; then
-  macOS_which_browser "${@}"
+  macOS_which_browser "$@"
 else
   bash_sourced && export -f macOS_which_browser
   unset -v this_file_name
