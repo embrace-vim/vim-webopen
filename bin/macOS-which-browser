@@ -63,7 +63,7 @@ if ! shell_sourced; then
   macOS_which_browser "${@}"
 else
   bash_sourced && export -f macOS_which_browser
-  unset this_file_name
+  unset -v this_file_name
   unset -f shell_sourced
   unset -f bash_sourced
 fi
