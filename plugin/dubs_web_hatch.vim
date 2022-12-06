@@ -146,6 +146,14 @@ function! s:default_browser()
       return "safari"
     elseif l:handler == "com.googlecode.iterm2"
       return ""
+    elseif l:handler == "net.kassett.finicky"
+      " https://github.com/johnste/finicky
+      " Finicky is used to customize the default browser and options for
+      " specific applications and URLs, but Finicky itself doesn't support
+      " options, so fallback on Chrome.
+      " - DEBAR: We could add, e.g., BROWSER environ to let user set a
+      "          different fallback default browser. If any user cares.
+      return "chrome"
     endif
   else
     " Linux.
