@@ -10,20 +10,24 @@
 
 macOS_which_browser () {
   local proplist="${HOME}/Library/Preferences/com.apple.LaunchServices/com.apple.launchservices.secure.plist"
+
   # Guard clause: Ensure Property List exists (and, by extension, is-macOS).
   if [ ! -f "${proplist}" ]; then
     >&2 printf '%s\n' "ERROR: Not found: LaunchServices Property List: ‘${proplist}’"
+
     return 1
   fi
 
   # Guard clause: Ensure `jq` installed.
   if ! command -v jq > /dev/null 2>&1; then
     >&2 printf '%s\n' "ERROR: Missing ‘jq’: Try: ‘brew install jq’"
+
     return 1
   fi
 
   # Copy the Property List to a temporary location, before transforming it.
   local tempfile="$(mktemp -t sh-sensible-open--com.apple.launchservices.secure.plist--XXXXX)"
+
   /usr/bin/env cp -f "${proplist}" "${tempfile}"
 
   # Convert the Property List to JSON.
@@ -38,11 +42,13 @@ macOS_which_browser () {
     cat "${tempfile}" | \
       /usr/bin/env jq -r '.LSHandlers[]  | select(.LSHandlerURLScheme == "https") | .LSHandlerRoleAll' \
     )
+
   printf '%s' "${handler_http}"
   # (lb): I'd expect the handlers to match, but perhaps not.
   if [ "${handler_http}" != "${handler_https}" ]; then
     printf '%s' " ${handler_https}"
   fi
+
   return 0
 }
 
