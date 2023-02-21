@@ -309,15 +309,26 @@ function! s:use_suggested_uri_or_parse_line(uri)
     return a:uri
   endif
   "  
+  " NOTE: \{-} is non-greedy *.
+  " NOTE: \@= is Vim look-ahead.
+  " NOTE: Because single quote ('), period (.), and comma (,)
+  "       might follow URL in, say, a reST or Markdown document,
+  "       allow them in the URL, but ignore if trailing
+  "       (and use look-ahead to not include in matchstr).
+  " RUNME:
+  "  echo matchstr('  "    https://tallybark.com, X ── │┐', '[a-z]*:\/\/[^ >;()\[\]]\{-}\([.,;)\]"'."'".']\?\($\|[[:space:]]\)\)\@=')
   " TRYME:
   "   >https://tallybark.com ──────────────────┐
-  "    https://tallybark.com, ──────────────── │┐
-  "    https://tallybark.com; ──────────────── ││┐
-  "   (https://tallybark.com) ──────────────── │││┬┐
-  "   [https://tallybark.com] ──────────────── │││││─┬─┐
-  "   "https://tallybark.com" ──────────────── │││││ │ │┐
-  "   'https://tallybark.com' ──────────────── │││││ │ ││───┐
-  return matchstr(getline("."), '[a-z]*:\/\/[^ >,;()\[\]"'."'".']*')
+  "    https://tallybark.com. ──────────────── │───────────────┐
+  "    https://tallybark.com, ──────────────── │───────────────│┐
+  "    https://tallybark.com; ──────────────── │┐              ││
+  "   (https://tallybark.com) ──────────────── ││┬┬────────────││─┐
+  "   [https://tallybark.com] ──────────────── ││││─┬─┬────────││─│─┐
+  "   "https://tallybark.com" ──────────────── ││││─│─│────────││─│─│┐
+  "   'https://tallybark.com' ──────────────── ││││─│─│────────││─│─││───┐
+  "   https://www.google.com/maps/place/13%C2%B008'20.1%22S+72%C2%B018'06.1%22W/@-13.1389113,-72.3022458,239m/,, 
+  "                                            ││││ │ ││       │├││─││───│─────────────────────────────────────┘
+  return matchstr(getline("."), '[a-z]*:\/\/[^ >;()\[\]]\{-}\([.,;)\]"'."'".']\?\($\|[[:space:]]\)\)\@=')
 endfunction
 
 function! s:open_browser_window(uri, incognito)
