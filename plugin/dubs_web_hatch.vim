@@ -316,7 +316,7 @@ function! s:use_suggested_uri_or_parse_line(uri)
   "       allow them in the URL, but ignore if trailing
   "       (and use look-ahead to not include in matchstr).
   " RUNME:
-  "  echo matchstr('  "    https://tallybark.com, X ── │┐', '[a-z]*:\/\/[^ >;()\[\]]\{-}\([.,;)\]"'."'".']\?\($\|[[:space:]]\)\)\@=')
+  "  :echo matchstr('  "    https://tallybark.com, X ── │┐', '[a-z]*:\/\/[^ >;()\[\]]\{-}\([.,;)\]"'."'".']\?\($\|[[:space:]]\)\)\@=')
   " TRYME:
   "   >https://tallybark.com ──────────────────┐
   "    https://tallybark.com. ──────────────── │───────────────┐
