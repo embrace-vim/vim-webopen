@@ -308,8 +308,16 @@ function! s:use_suggested_uri_or_parse_line(uri)
   if a:uri != ""
     return a:uri
   endif
-
-  return matchstr(getline("."), '[a-z]*:\/\/[^ >,;()]*')
+  "  
+  " TRYME:
+  "   >https://tallybark.com ──────────────────┐
+  "    https://tallybark.com, ──────────────── │┐
+  "    https://tallybark.com; ──────────────── ││┐
+  "   (https://tallybark.com) ──────────────── │││┬┐
+  "   [https://tallybark.com] ──────────────── │││││─┬─┐
+  "   "https://tallybark.com" ──────────────── │││││ │ │┐
+  "   'https://tallybark.com' ──────────────── │││││ │ ││───┐
+  return matchstr(getline("."), '[a-z]*:\/\/[^ >,;()\[\]"'."'".']*')
 endfunction
 
 function! s:open_browser_window(uri, incognito)
