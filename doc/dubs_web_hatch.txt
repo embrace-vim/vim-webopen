@@ -28,7 +28,7 @@ gW			Opens a new browser window with the location of the
 			and "gF" commands that open the file path found under
 			the cursor. Works from normal mode.
 
-							*gW*
+							*g!*
 g!			Like "gW", but opens location in an incognito (aka
 			private) browser window. Works from normal mode.
 
