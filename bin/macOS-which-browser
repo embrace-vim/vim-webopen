@@ -9,6 +9,7 @@
 #   https://github.com/landonb/sh-sensible-open#☔
 
 macOS_which_browser () {
+  # CXREF: ~/Library/Preferences/com.apple.LaunchServices/com.apple.launchservices.secure.plist
   local proplist="${HOME}/Library/Preferences/com.apple.LaunchServices/com.apple.launchservices.secure.plist"
 
   # Guard clause: Ensure Property List exists (and, by extension, is-macOS).
