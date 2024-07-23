@@ -49,6 +49,8 @@ macOS_which_browser () {
     printf '%s' " ${handler_https}"
   fi
 
+  command rm -- "${tempfile}"
+
   return 0
 }
 
