@@ -151,7 +151,7 @@ function! s:default_browser()
       " Finicky is used to customize the default browser and options for
       " specific applications and URLs, but Finicky itself doesn't support
       " options, so fallback on Chrome.
-      " - DEBAR: We could add, e.g., BROWSER environ to let user set a
+      " - INERT: We could add, e.g., BROWSER environ to let user set a
       "          different fallback default browser. If any user cares.
       return "chrome"
     endif
