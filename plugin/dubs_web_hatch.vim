@@ -420,10 +420,8 @@ function! s:place_binding_web_open_url()
 
   " 2020-05-10: I (finally) learned about Vim's builtin `gf` (and `gF`), and now
   " I'm thinking that maybe `gW` makes sense ("go Web"), which is not mapped by Vim.
-  " - So trying gW, but leaving historic \T that's been wired for a spell (albeit broken).
-  "   However, the <Leader>T hooks are still nice to have because they work in all modes.
-  "   2020-09-01: \T does not open URL under cursor, but it does a selection, useful if
-  "   the URL you want to open does not look like one.
+  " - So trying gW, but leaving historic \T that's been wired for a spell,
+  "   especially because <Leader>T is wired is multiple modes modes.
   nnoremap gW :call <SID>web_open_url('', 0)<CR>
 
   nnoremap <Leader>T :call <SID>web_open_url('', 0)<CR>
