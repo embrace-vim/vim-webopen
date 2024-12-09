@@ -46,7 +46,7 @@ let g:loaded_vim_web_hatch_autoload_browser = 1
 " Path to this script's directory: get absolute path; resolve symlinks; get directory name.
 " - (lb) Running at script/source level, because if I <F9> reload this script,
 "        I see different (incorrect) path (of another plugin,
-"        ~/.vim/pack/landonb/start/vim-netrw-link-resolve/net).
+"        ~/.vim/pack/landonb/start/vim-netrw-link-resolve/net.
 let s:vim_web_hatch_plugin_path = fnamemodify(resolve(expand('<sfile>:p')), ':h')
 
 function! s:macOS_which_browser()
