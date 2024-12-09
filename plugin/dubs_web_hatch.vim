@@ -432,7 +432,15 @@ function! s:place_binding_web_open_url()
   "  vnoremap <Leader>T y:!sensible-browser '<C-R>"'<CR>
   " will fail on the pound sign/octothorpe/hash symbol, complaining
   "   E499: Empty file name for '%' or '#', only works with ":p:h"
-  vnoremap <silent> <Leader>T y:execute "!sensible-browser " . shellescape('<C-R>"', 1)<CR>
+  if executable("sensible-browser")
+    " Linux (or at least Debian) built-in.
+    vnoremap <silent> <Leader>T y:execute "!sensible-browser " .. shellescape('<C-R>"', 1)<CR>
+  elseif executable("sensible-open")
+    " https://github.com/landonb/sh-sensible-open#☔
+    vnoremap <silent> <Leader>T y:execute "!sensible-open " .. shellescape('<C-R>"', 1)<CR>
+  else
+    vnoremap <silent> <Leader>T y:call <SID>web_open_url('<C-r>"', 0)<CR>
+  endif
 endfunction
 
 call <SID>place_binding_web_open_url()
