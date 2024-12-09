@@ -34,7 +34,7 @@ let g:loaded_dubs_web_hatch_plugin = 1
 " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 function! s:reset_binding_search_web_for_selection()
-  exe "silent! unmap " .. g:dubs_web_hatch_google_search_seq
+  exe "silent! nunmap " .. g:dubs_web_hatch_google_search_seq
   exe "silent! iunmap " .. g:dubs_web_hatch_google_search_seq
   exe "silent! vunmap " .. g:dubs_web_hatch_google_search_seq
 endfunction
@@ -58,7 +58,7 @@ function! s:place_binding_search_web_for_selection()
   " URL, rather than send to default search engine, when invoked thru
   " sensible-browser (as opposed to typing a term in the location bar
   " and the browser deciding if it is a URL or if it is search text).
-  exe "noremap " .. g:dubs_web_hatch_google_search_seq ..
+  exe "nnoremap " .. g:dubs_web_hatch_google_search_seq ..
     \ " :call <SID>web_open_url('https://www.google.com/search?q=<C-R><C-W>', 0)<CR>"
   exe "inoremap <silent> " .. g:dubs_web_hatch_google_search_seq ..
     \ " <C-O>:call <SID>web_open_url('https://www.google.com/search?q=<C-R><C-W>', 0)<CR>"
@@ -79,7 +79,7 @@ endfunction
 " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 function! s:reset_binding_search_web_for_definition()
-  exe "silent! unmap " .. g:dubs_web_hatch_google_define_seq
+  exe "silent! nunmap " .. g:dubs_web_hatch_google_define_seq
   exe "silent! iunmap " .. g:dubs_web_hatch_google_define_seq
   exe "silent! vunmap " .. g:dubs_web_hatch_google_define_seq
 endfunction
@@ -101,7 +101,7 @@ function! s:place_binding_search_web_for_definition()
 
   " [lb]: Almost same as place_binding_search_web_for_selection, above,
   " w/ `define+` added.
-  exe "noremap <silent> " .. g:dubs_web_hatch_google_define_seq ..
+  exe "nnoremap <silent> " .. g:dubs_web_hatch_google_define_seq ..
     \ " :call <SID>web_open_url('https://www.google.com/search?q=define+<C-R><C-W>', 0)<CR>"
   exe "inoremap <silent> " .. g:dubs_web_hatch_google_define_seq ..
     \ " <C-O>:call <SID>web_open_url('https://www.google.com/search?q=define+<C-R><C-W>', 0)<CR>"
@@ -434,7 +434,7 @@ endfunction
 " -------------------------------------------------------------------
 
 function! s:reset_binding_web_open_url()
-  exe "silent! unmap " .. g:dubs_web_hatch_open_url_seq
+  exe "silent! nunmap " .. g:dubs_web_hatch_open_url_seq
   exe "silent! iunmap " .. g:dubs_web_hatch_open_url_seq
   exe "silent! vunmap " .. g:dubs_web_hatch_open_url_seq
 endfunction
@@ -480,7 +480,7 @@ endfunction
 " *** Bonus mapping
 
 function! s:reset_binding_web_open_url_bonus()
-  exe "silent! unmap " .. g:dubs_web_hatch_open_url_bonus_seq
+  exe "silent! nunmap " .. g:dubs_web_hatch_open_url_bonus_seq
 endfunction
 
 function! s:place_binding_web_open_url_bonus()
@@ -508,7 +508,7 @@ endfunction
 " -------------------------------------------------------------------
 
 function! s:reset_binding_web_open_url_incognito()
-  ext "silent! unmap " .. g:dubs_web_hatch_open_incognito_seq
+  exe "silent! nunmap " .. g:dubs_web_hatch_open_incognito_seq
 endfunction
 
 function! s:place_binding_web_open_url_incognito()
