@@ -82,7 +82,7 @@ function! s:place_binding_search_web_for_selection()
     \ ":<C-U>call <SID>web_open_url('https://www.google.com/search?q=<C-R>\"', 0)<CR>"
 
   " Traditional default: \W opens browser to Google search of selected text.
-  call s:create_maps(
+  call embrace#multimap#create_maps(
     \ "search",
     \ "vim_web_hatch_google_search_seq",
     \ "<Leader>W",
@@ -154,7 +154,7 @@ function! s:place_binding_search_web_for_definition()
     \ ":<C-U>call <SID>web_open_url('https://www.google.com/search?q=define+<C-R>\"', 0)<CR>"
 
   " Traditional default: \D opens browser to Google define of selected text.
-  call s:create_maps(
+  call embrace#multimap#create_maps(
     \ "define",
     \ "vim_web_hatch_google_define_seq",
     \ "<Leader>D",
@@ -589,7 +589,7 @@ function! s:place_binding_web_open_url()
   let l:v_cmd = "y:call <SID>web_open_url('<C-r>\"', 0)<CR>"
 
   " Traditional default: <Leader>T opens URL under cursor/selected.
-  call s:create_maps(
+  call embrace#multimap#create_maps(
     \ "open",
     \ "vim_web_hatch_open_url_seq",
     \ "<Leader>T",
@@ -660,7 +660,7 @@ function! s:place_binding_web_open_url_incognito()
   let l:v_cmd = "y:call <SID>web_open_url('<C-r>\"', 1)<CR>"
 
   " Defaults <Leader>P to open URL under cursor/selected in private window.
-  call s:create_maps(
+  call embrace#multimap#create_maps(
     \ "incognito",
     \ "vim_web_hatch_open_incognito_seq",
     \ "<Leader>P",

@@ -24,7 +24,7 @@ let g:loaded_vim_web_hatch_autoload_multimap = 1
 " Key sequence command map utilities
 " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-function! s:create_maps(maps_key, solo_var, default_seq, n_cmd, i_cmd, v_cmd) abort
+function! embrace#multimap#create_maps(maps_key, solo_var, default_seq, n_cmd, i_cmd, v_cmd) abort
   try
     call s:create_mode_maps(a:maps_key, a:solo_var, a:default_seq, a:n_cmd, a:i_cmd, a:v_cmd)
   catch
