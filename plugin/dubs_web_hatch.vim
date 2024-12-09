@@ -320,14 +320,14 @@ function! s:use_suggested_uri_or_parse_line(uri)
 
     return a:uri
   endif
-  "  
-  " NOTE: \{-} is non-greedy *.
-  " NOTE: \@= is Vim look-ahead.
-  " NOTE: Because single quote ('), period (.), and comma (,)
-  "       might follow URL in, say, a reST or Markdown document,
-  "       allow them in the URL, but ignore if trailing
-  "       (and use look-ahead to not include in matchstr).
-  " RUNME:
+
+  " SAVVY: \{-} is non-greedy *.
+  " SAVVY: \@= is Vim look-ahead.
+  " SAVVY: Because single quote ('), period (.), and comma (,)
+  "        might follow URL in, say, a reST or Markdown document,
+  "        allow them in the URL, but ignore if trailing
+  "        (and use look-ahead to not include in matchstr).
+  " TRYME:
   "  :echo matchstr('  "    https://tallybark.com, X ── │┐', '[a-z]*:\/\/[^ >;()\[\]]\{-}\([.,;)\]"'."'".']\?\($\|[[:space:]]\)\)\@=')
   " TRYME:
   "   >https://tallybark.com ──────────────────┐
