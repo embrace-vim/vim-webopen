@@ -422,11 +422,6 @@ function! s:reset_binding_web_open_url()
   silent! vunmap <Leader>T
 endfunction
 
-function! s:reset_binding_web_open_url_incognito()
-  " 2020-09-01: (lb): Unbound/Available: gS, g!. Taken: gP, g@, g#...
-  silent! unmap g!
-endfunction
-
 function! s:place_binding_web_open_url()
   call <SID>reset_binding_web_open_url()
 
@@ -460,6 +455,11 @@ endfunction
 call <SID>place_binding_web_open_url()
 
 " -------------------------------------------------------------------
+
+function! s:reset_binding_web_open_url_incognito()
+  " 2020-09-01: (lb): Unbound/Available: gS, g!. Taken: gP, g@, g#...
+  silent! unmap g!
+endfunction
 
 function! s:place_binding_web_open_url_incognito()
   call <SID>reset_binding_web_open_url_incognito()
