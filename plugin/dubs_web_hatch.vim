@@ -119,21 +119,27 @@ function! s:macOS_which_browser()
   " Hrmm, don't see this set like I'd expect on Linux:
   "   echom v:shell_error
   "  echom l:handler
+
   return l:handler
 endfunction
 
 function! s:default_browser()
   if has('macunix')
     let l:handler = <SID>macOS_which_browser()
+
     if l:handler == "com.google.chrome"
+
       return "chrome"
     elseif l:handler == "org.mozilla.firefox"
+
       return "firefox"
     elseif l:handler == "com.apple.safari"
       " /Applications/Sarari.app/Contents/MacOS/Safari
       " Note that Safari (a Cocoa app, not a CLI app) does not accept arguments.
+
       return "safari"
     elseif l:handler == "com.googlecode.iterm2"
+
       return ""
     elseif l:handler == "net.kassett.finicky"
       " https://github.com/johnste/finicky
@@ -142,29 +148,36 @@ function! s:default_browser()
       " options, so fallback on Chrome.
       " - INERT: We could add, e.g., BROWSER environ to let user set a
       "          different fallback default browser. If any user cares.
+
       return "chrome"
     endif
   else
     " Linux.
     " (lb): `echo $BROWSER` shows nothing, so ask sensible-browser, I suppose.
     let l:handler = system('sensible-browser --version')
+
     " Use \(^\|\n\) because Chromium's --version's first line is 'Using PPAPI flash.'
     if l:handler =~ '\(^\|\n\)Google Chrome '
       " /usr/bin/google-chrome-stable
+
       return "chrome"
     elseif l:handler =~ '\(^\|\n\)Chromium '
       " /usr/bin/chromium-browser
+
       return "chrome"
     elseif l:handler =~ '\(^\|\n\)Mozilla Firefox '
       " /usr/bin/firefox
+
       return "firefox"
     endif
   endif
+
   return ""
 endfunction
 
 function! s:browopts_incognito(which_browser, options, incognito)
   let l:options = a:options
+
   if a:incognito == 1
     if a:which_browser == 'chrome'
       let l:options = l:options . "--incognito "
@@ -172,26 +185,31 @@ function! s:browopts_incognito(which_browser, options, incognito)
       let l:options = l:options . "--private-window "
     endif
   endif
+
   return l:options
 endfunction
 
 function! s:browopts_new_window(which_browser, options)
   let l:options = a:options
+
   if !exists("g:dubs_web_hatch_use_tab") || g:dubs_web_hatch_use_tab == 0
     if a:which_browser == 'chrome' || a:which_browser == 'firefox'
       let l:options = l:options . "--new-window "
     endif
   endif
+
   return l:options
 endfunction
 
 function! s:browopts_profile_dir(which_browser, options)
   let l:options = a:options
+
   if !exists("g:dubs_web_hatch_mru_profile") || g:dubs_web_hatch_mru_profile == 0
     if a:which_browser == 'chrome'
       let l:options = l:options . "--profile-directory=Default "
     endif
   endif
+
   return l:options
 endfunction
 
@@ -212,6 +230,7 @@ endfunction
 "     - Note also order matters: Put <location> last.
 function! s:browser_cmd(which_browser, options)
   let l:browpener = ""
+
   if has('macunix')
     if a:options == ""
       let l:browpener = "open -a"
@@ -232,6 +251,7 @@ function! s:browser_cmd(which_browser, options)
   else
     let l:browpener = "sensible-browser"
   endif
+  
   return l:browpener
 endfunction
 
@@ -285,8 +305,10 @@ endfunction
 "   which is novel, but not a feature that I see myself starting to use.
 function! s:web_open_url(suggested_uri, incognito)
   let l:uri = s:use_suggested_uri_or_parse_line(a:suggested_uri)
+
   if l:uri == ""
     echom "No URI found in line."
+
     return
   endif
 
@@ -295,6 +317,7 @@ endfunction
 
 function! s:use_suggested_uri_or_parse_line(uri)
   if a:uri != ""
+
     return a:uri
   endif
   "  
