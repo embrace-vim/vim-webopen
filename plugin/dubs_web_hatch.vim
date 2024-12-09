@@ -20,15 +20,6 @@ let g:loaded_dubs_web_hatch_plugin = 1
 
 " -------------------------------------------------------------------
 
-" MAYBE/2020-05-10 14:04: Add g:global_variable for choosing URL opener,
-" or make distro-specific choice, e.g.,
-"
-"   if (match(system('cat /proc/version'), 'Ubuntu') >= 0)
-"     let g:dubs_web_hatch_open = 'sensible-browser'
-"   ...
-
-" -------------------------------------------------------------------
-
 " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 " Search Web for Selection, or Word Under Cursor
 " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -116,6 +107,24 @@ endfunction
 " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 " Open selected URL
 " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+" INERT/2020-05-10: Add g:global_variable for choosing URL opener,
+" possibly with distro-specific fallback, e.g.,
+"
+"   if !exists("g:dubs_web_hatch_open")
+"     if (match(system('cat /proc/version'), 'Ubuntu') >= 0)
+"       let g:dubs_web_hatch_open = 'sensible-browser'
+"     ...
+"
+" - Except code calls `sensible-browser --version`, which wouldn't
+"   be reliable; and how would we know what options to use to open
+"   an incognito window, or to open a new window vs. new tab?
+"
+" In any case, on macOS uses `open` command, otherwise it checks
+" the command exists via `executable('sensible-browser')`, which
+" seems robust enough.
+
+" ***
 
 " https://stackoverflow.com/questions/4976776/how-to-get-path-to-the-current-vimscript-being-executed
 " Path to this script's directory: get absolute path; resolve symlinks; get directory name.
