@@ -9,14 +9,14 @@
 "        https://github.com/landonb/vim-source-reloader#↩️
 " - Uncomment this `unlet` (or disable the `finish`) and hit <F9>.
 "
-" silent! unlet g:loaded_dubs_web_hatch_plugin
+" silent! unlet g:loaded_vim_web_hatch_plugin
 
-if exists("g:loaded_dubs_web_hatch_plugin") || &cp
+if exists("g:loaded_vim_web_hatch_plugin") || &cp
 
   finish
 endif
 
-let g:loaded_dubs_web_hatch_plugin = 1
+let g:loaded_vim_web_hatch_plugin = 1
 
 " -------------------------------------------------------------------
 
@@ -29,10 +29,10 @@ let g:loaded_dubs_web_hatch_plugin = 1
 " Search for the term under the cursor or selected, e.g.,
 " https://www.google.com/search?q=<TERM>
 "
-" - To define the map sequences, use g:dubs_web_hatch_maps["search"],
+" - To define the map sequences, use g:vim_web_hatch_maps["search"],
 "   e.g.,
 "
-"     let g:dubs_web_hatch_maps = {
+"     let g:vim_web_hatch_maps = {
 "       \   'search':
 "       \   {
 "       \     'nmap': '<Leader>W',
@@ -44,24 +44,24 @@ let g:loaded_dubs_web_hatch_plugin = 1
 " - Or simplify the config if you want the same sequence used for all
 "   three modes, e.g.,
 "
-"     let g:dubs_web_hatch_maps = {
+"     let g:vim_web_hatch_maps = {
 "       \   'search': '<Leader>W',
 "       ...
 "
-" - Alternatively, if g:dubs_web_hatch_maps["search"] is not defined,
-"   you can use g:dubs_web_hatch_google_search_seq instead, e.g.,
+" - Alternatively, if g:vim_web_hatch_maps["search"] is not defined,
+"   you can use g:vim_web_hatch_google_search_seq instead, e.g.,
 "
-"     let g:dubs_web_hatch_google_search_seq = '<Leader>W'
+"     let g:vim_web_hatch_google_search_seq = '<Leader>W'
 "
 "   and that sequence will be used to create maps for each of the
 "   three modes, normal, insert, and visual.
 "
 " - To disable a map, set the 'nmap', 'imap', or 'vmap' entry to
 "   an empty string or an empty list; or set fallback variable
-"   (g:dubs_web_hatch_google_search_seq) to an empty string.
+"   (g:vim_web_hatch_google_search_seq) to an empty string.
 "
-" - Default value: If neither g:dubs_web_hatch_maps["search"]
-"   nor g:dubs_web_hatch_google_search_seq is defined, and if
+" - Default value: If neither g:vim_web_hatch_maps["search"]
+"   nor g:vim_web_hatch_google_search_seq is defined, and if
 "   the sequence is not already mapped, defaults to:
 "
 "     <Leader>W
@@ -84,7 +84,7 @@ function! s:place_binding_search_web_for_selection()
   " Traditional default: \W opens browser to Google search of selected text.
   call s:create_maps(
     \ "search",
-    \ "dubs_web_hatch_google_search_seq",
+    \ "vim_web_hatch_google_search_seq",
     \ "<Leader>W",
     \ l:n_cmd,
     \ l:i_cmd,
@@ -102,10 +102,10 @@ endfunction
 " Search for the term under the cursor or selected, e.g.,
 " https://www.google.com/search?q=define+<TERM>
 "
-" - To define the map sequences, use g:dubs_web_hatch_maps["define"],
+" - To define the map sequences, use g:vim_web_hatch_maps["define"],
 "   e.g.,
 "
-"     let g:dubs_web_hatch_maps = {
+"     let g:vim_web_hatch_maps = {
 "       \   'define':
 "       \   {
 "       \     'nmap': '<Leader>D',
@@ -117,24 +117,24 @@ endfunction
 " - Or simplify the config if you want the same sequence used for all
 "   three modes, e.g.,
 "
-"     let g:dubs_web_hatch_maps = {
+"     let g:vim_web_hatch_maps = {
 "       \   'define': '<Leader>D',
 "       ...
 "
-" - Alternatively, if g:dubs_web_hatch_maps["define"] is not defined,
-"   you can use g:dubs_web_hatch_google_define_seq instead, e.g.,
+" - Alternatively, if g:vim_web_hatch_maps["define"] is not defined,
+"   you can use g:vim_web_hatch_google_define_seq instead, e.g.,
 "
-"     let g:dubs_web_hatch_google_define_seq = '<Leader>D'
+"     let g:vim_web_hatch_google_define_seq = '<Leader>D'
 "
 "   and that sequence will be used to create maps for each of the
 "   three modes, normal, insert, and visual.
 "
 " - To disable a map, set the 'nmap', 'imap', or 'vmap' entry to
 "   an empty string or an empty list; or set fallback variable
-"   (g:dubs_web_hatch_google_define_seq) to an empty string.
+"   (g:vim_web_hatch_google_define_seq) to an empty string.
 "
-" - Default value: If neither g:dubs_web_hatch_maps["define"]
-"   nor g:dubs_web_hatch_google_define_seq is defined, and if
+" - Default value: If neither g:vim_web_hatch_maps["define"]
+"   nor g:vim_web_hatch_google_define_seq is defined, and if
 "   the sequence is not already mapped, defaults to:
 "
 "     <Leader>D
@@ -156,7 +156,7 @@ function! s:place_binding_search_web_for_definition()
   " Traditional default: \D opens browser to Google define of selected text.
   call s:create_maps(
     \ "define",
-    \ "dubs_web_hatch_google_define_seq",
+    \ "vim_web_hatch_google_define_seq",
     \ "<Leader>D",
     \ l:n_cmd,
     \ l:i_cmd,
@@ -172,9 +172,9 @@ endfunction
 " INERT/2020-05-10: Add g:global_variable for choosing URL opener,
 " possibly with distro-specific fallback, e.g.,
 "
-"   if !exists("g:dubs_web_hatch_open")
+"   if !exists("g:vim_web_hatch_open")
 "     if (match(system('cat /proc/version'), 'Ubuntu') >= 0)
-"       let g:dubs_web_hatch_open = 'sensible-browser'
+"       let g:vim_web_hatch_open = 'sensible-browser'
 "     ...
 "
 " - Except code calls `sensible-browser --version`, which wouldn't
@@ -192,13 +192,13 @@ endfunction
 " - (lb) Running at script/source level, because if I <F9> reload this script,
 "        I see different (incorrect) path (of another plugin,
 "        ~/.vim/pack/landonb/start/vim-netrw-link-resolve/net).
-let s:dubs_web_hatch_plugin_path = fnamemodify(resolve(expand('<sfile>:p')), ':h')
+let s:vim_web_hatch_plugin_path = fnamemodify(resolve(expand('<sfile>:p')), ':h')
 
 function! s:macOS_which_browser()
   " 2020-09-01: (lb): Not worrying about path separator.
   "             (Vim handles, right? That, or '/' works on Windows.)
   " Ref: fnamemodify(..., ':h'): See: :h filename-modifiers.
-  let l:plugbin = fnamemodify(s:dubs_web_hatch_plugin_path, ':h') . '/' . 'bin'
+  let l:plugbin = fnamemodify(s:vim_web_hatch_plugin_path, ':h') . '/' . 'bin'
   "  echom l:plugbin
   let l:whicher = l:plugbin . '/' . 'macOS-which-browser'
   " MEH: On Windows, use 2>NUL instead.
@@ -287,7 +287,7 @@ endfunction
 function! s:browopts_new_window(which_browser, options)
   let l:options = a:options
 
-  if !exists("g:dubs_web_hatch_use_tab") || g:dubs_web_hatch_use_tab == 0
+  if !exists("g:vim_web_hatch_use_tab") || g:vim_web_hatch_use_tab == 0
     if a:which_browser == 'chrome' || a:which_browser == 'firefox'
       let l:options = l:options . "--new-window "
     endif
@@ -301,7 +301,7 @@ endfunction
 function! s:browopts_profile_dir(which_browser, options)
   let l:options = a:options
 
-  if !exists("g:dubs_web_hatch_mru_profile") || g:dubs_web_hatch_mru_profile == 0
+  if !exists("g:vim_web_hatch_mru_profile") || g:vim_web_hatch_mru_profile == 0
     if a:which_browser == 'chrome'
       let l:options = l:options . "--profile-directory=Default "
     endif
@@ -461,9 +461,9 @@ function! s:open_browser_window(uri, incognito)
   let l:options = ""
   " Add private browsing flag, perhaps, depending on which command was called.
   let l:options = <SID>browopts_incognito(l:which_browser, l:options, a:incognito)
-  " Add new window flag, usually, unless disabled via g:dubs_web_hatch_use_tab.
+  " Add new window flag, usually, unless disabled via g:vim_web_hatch_use_tab.
   let l:options = <SID>browopts_new_window(l:which_browser, l:options)
-  " Tell Chrome to use default user profile, unless g:dubs_web_hatch_mru_profile.
+  " Tell Chrome to use default user profile, unless g:vim_web_hatch_mru_profile.
   let l:options = <SID>browopts_profile_dir(l:which_browser, l:options)
 
   let l:browpener = <SID>browser_cmd(l:which_browser, options)
@@ -527,10 +527,10 @@ endfunction
 "
 " Open the URL under the cursor or selected.
 "
-" - To define the map sequences, use g:dubs_web_hatch_maps["open"],
+" - To define the map sequences, use g:vim_web_hatch_maps["open"],
 "   e.g.,
 "
-"     let g:dubs_web_hatch_maps = {
+"     let g:vim_web_hatch_maps = {
 "       \   'open':
 "       \   {
 "       \     'nmap': [ '<Leader>T', 'gW' ],
@@ -542,24 +542,24 @@ endfunction
 " - Or simplify the config if you want the same sequence used for all
 "   three modes, e.g.,
 "
-"     let g:dubs_web_hatch_maps = {
+"     let g:vim_web_hatch_maps = {
 "       \   'open': '<Leader>T',
 "       ...
 "
-" - Alternatively, if g:dubs_web_hatch_maps["open"] is not defined,
-"   you can use g:dubs_web_hatch_open_url_seq instead, e.g.,
+" - Alternatively, if g:vim_web_hatch_maps["open"] is not defined,
+"   you can use g:vim_web_hatch_open_url_seq instead, e.g.,
 "
-"     let g:dubs_web_hatch_open_url_seq = '<Leader>T'
+"     let g:vim_web_hatch_open_url_seq = '<Leader>T'
 "
 "   and that sequence will be used to create maps for each of the
 "   three modes, normal, insert, and visual.
 "
 " - To disable a map, set the 'nmap', 'imap', or 'vmap' entry to
 "   an empty string or an empty list; or set fallback variable
-"   (g:dubs_web_hatch_open_url_seq) to an empty string.
+"   (g:vim_web_hatch_open_url_seq) to an empty string.
 "
-" - Default value: If neither g:dubs_web_hatch_maps["open"]
-"   nor g:dubs_web_hatch_open_url_seq is defined, and if
+" - Default value: If neither g:vim_web_hatch_maps["open"]
+"   nor g:vim_web_hatch_open_url_seq is defined, and if
 "   the sequence is not already mapped, defaults to:
 "
 "     <Leader>T
@@ -591,7 +591,7 @@ function! s:place_binding_web_open_url()
   " Traditional default: <Leader>T opens URL under cursor/selected.
   call s:create_maps(
     \ "open",
-    \ "dubs_web_hatch_open_url_seq",
+    \ "vim_web_hatch_open_url_seq",
     \ "<Leader>T",
     \ l:n_cmd,
     \ l:i_cmd,
@@ -608,10 +608,10 @@ endfunction
 "
 " Open the URL under the cursor or selected in incognito/private window.
 "
-" - To define the map sequences, use g:dubs_web_hatch_maps["incognito"],
+" - To define the map sequences, use g:vim_web_hatch_maps["incognito"],
 "   e.g.,
 "
-"     let g:dubs_web_hatch_maps = {
+"     let g:vim_web_hatch_maps = {
 "       \   'incognito': {
 "       \     'nmap': '<Leader>P',
 "       \     'imap': '<Leader>P',
@@ -622,24 +622,24 @@ endfunction
 " - Or simplify the config if you want the same sequence used for all
 "   three modes, e.g.,
 "
-"     let g:dubs_web_hatch_maps = {
+"     let g:vim_web_hatch_maps = {
 "       \   'incognito': '<Leader>P',
 "       ...
 "
-" - Alternatively, if g:dubs_web_hatch_maps["incognito"] is not defined,
-"   you can use g:dubs_web_hatch_open_incognito_seq instead, e.g.,
+" - Alternatively, if g:vim_web_hatch_maps["incognito"] is not defined,
+"   you can use g:vim_web_hatch_open_incognito_seq instead, e.g.,
 "
-"     let g:dubs_web_hatch_open_incognito_seq = '<Leader>P'
+"     let g:vim_web_hatch_open_incognito_seq = '<Leader>P'
 "
 "   and that sequence will be used to create maps for each of the
 "   three modes, normal, insert, and visual.
 "
 " - To disable a map, set the 'nmap', 'imap', or 'vmap' entry to
 "   an empty string or an empty list; or set fallback variable
-"   (g:dubs_web_hatch_open_incognito_seq) to an empty string.
+"   (g:vim_web_hatch_open_incognito_seq) to an empty string.
 "
-" - Default value: If neither g:dubs_web_hatch_maps["incognito"]
-"   nor g:dubs_web_hatch_open_incognito_seq is defined, and if
+" - Default value: If neither g:vim_web_hatch_maps["incognito"]
+"   nor g:vim_web_hatch_open_incognito_seq is defined, and if
 "   the sequence is not already mapped, defaults to:
 "
 "     <Leader>P
@@ -649,7 +649,7 @@ endfunction
 " window. But we've changed the default to <Leader>P for better parity
 " with the other maps (which are all <Leader>{some-uppercase-character},
 " and which each define all three mode maps).
-" - Given the new configurability feature (g:dubs_web_hatch_maps), the
+" - Given the new configurability feature (g:vim_web_hatch_maps), the
 "   author expects/encoursages each user to decide for themselves what
 "   key sequences and which modes they want to map. So it really should
 "   not matter too much what the default is.
@@ -662,7 +662,7 @@ function! s:place_binding_web_open_url_incognito()
   " Defaults <Leader>P to open URL under cursor/selected in private window.
   call s:create_maps(
     \ "incognito",
-    \ "dubs_web_hatch_open_incognito_seq",
+    \ "vim_web_hatch_open_incognito_seq",
     \ "<Leader>P",
     \ l:n_cmd,
     \ l:i_cmd,
@@ -687,10 +687,10 @@ endfunction
 " ***
 
 function! s:create_mode_maps(maps_key, solo_var, default_seq, n_cmd, i_cmd, v_cmd) abort
-  let l:maps_var = "g:dubs_web_hatch_maps['" .. a:maps_key .."']"
+  let l:maps_var = "g:vim_web_hatch_maps['" .. a:maps_key .."']"
 
-  if exists("g:dubs_web_hatch_maps") && exists(l:maps_var)
-    let l:feature_val = g:dubs_web_hatch_maps[a:maps_key]
+  if exists("g:vim_web_hatch_maps") && exists(l:maps_var)
+    let l:feature_val = g:vim_web_hatch_maps[a:maps_key]
     let l:val_type = type(l:feature_val)
 
     if l:val_type == v:t_string || l:val_type == v:t_list
@@ -704,7 +704,7 @@ function! s:create_mode_maps(maps_key, solo_var, default_seq, n_cmd, i_cmd, v_cm
       let l:i_keys = s:listify(get(l:feature_val, "imap", []), l:maps_var)
       let l:v_keys = s:listify(get(l:feature_val, "vmap", []), l:maps_var)
     else
-      echom "ALERT: vim-web-hatch: Unrecognized value type for g:dubs_web_hatch_maps['"
+      echom "ALERT: vim-web-hatch: Unrecognized value type for g:vim_web_hatch_maps['"
         \ .. a:maps_key .."']: " .. l:val_type
 
       return
@@ -761,54 +761,54 @@ endfunction
 
 function! DubsWebHatchSetup() abort
   " The following USAGE examples assume config dictionary setup thusly:
-  "   let g:dubs_web_hatch_maps = {}
-  "   let g:dubs_web_hatch_maps.open = {}
-  "   let g:dubs_web_hatch_maps.define = {}
-  "   let g:dubs_web_hatch_maps.search = {}
-  "   let g:dubs_web_hatch_maps.incognito = {}
+  "   let g:vim_web_hatch_maps = {}
+  "   let g:vim_web_hatch_maps.open = {}
+  "   let g:vim_web_hatch_maps.define = {}
+  "   let g:vim_web_hatch_maps.search = {}
+  "   let g:vim_web_hatch_maps.incognito = {}
 
   " Open URL under cursor/selected in browser.
   " - USAGE: E.g. (mnemonic: "open browser _T_ab"):
   "     " For normal, insert, and visual modes:
-  "     let g:dubs_web_hatch_open_url_seq = "<Leader>T"
+  "     let g:vim_web_hatch_open_url_seq = "<Leader>T"
   "     " For select modes:
-  "     let g:dubs_web_hatch_maps.open.nmap = "<Leader>T"
-  "     let g:dubs_web_hatch_maps.open.imap = "<Leader>T"
-  "     let g:dubs_web_hatch_maps.open.vmap = "<Leader>T"
+  "     let g:vim_web_hatch_maps.open.nmap = "<Leader>T"
+  "     let g:vim_web_hatch_maps.open.imap = "<Leader>T"
+  "     let g:vim_web_hatch_maps.open.vmap = "<Leader>T"
   call <SID>place_binding_web_open_url()
 
   " Run Google define on term under cursor/selected.
   " - USAGE: E.g. (mnemonic: "_D_efine"):
   "     " For normal, insert, and visual modes:
-  "     let g:dubs_web_hatch_google_define_seq = "<Leader>D"
+  "     let g:vim_web_hatch_google_define_seq = "<Leader>D"
   "     " For select modes:
-  "     let g:dubs_web_hatch_maps.define.nmap = "<Leader>D"
-  "     let g:dubs_web_hatch_maps.define.imap = "<Leader>D"
-  "     let g:dubs_web_hatch_maps.define.vmap = "<Leader>D"
+  "     let g:vim_web_hatch_maps.define.nmap = "<Leader>D"
+  "     let g:vim_web_hatch_maps.define.imap = "<Leader>D"
+  "     let g:vim_web_hatch_maps.define.vmap = "<Leader>D"
   call <SID>place_binding_search_web_for_definition()
 
   " Run Google search on term under cursor/selected.
   " - USAGE: E.g. (mnemonic: "search _W_eb"):
   "     " For normal, insert, and visual modes:
-  "     let g:dubs_web_hatch_google_search_seq = "<Leader>W"
+  "     let g:vim_web_hatch_google_search_seq = "<Leader>W"
   "     " For select modes:
-  "     let g:dubs_web_hatch_maps.search.nmap = "<Leader>W"
-  "     let g:dubs_web_hatch_maps.search.imap = "<Leader>W"
-  "     let g:dubs_web_hatch_maps.search.vmap = "<Leader>W"
+  "     let g:vim_web_hatch_maps.search.nmap = "<Leader>W"
+  "     let g:vim_web_hatch_maps.search.imap = "<Leader>W"
+  "     let g:vim_web_hatch_maps.search.vmap = "<Leader>W"
   call <SID>place_binding_search_web_for_selection()
 
   " Open URL under cursor/selected in incognito window.
   " - USAGE: E.g. (mnemonic: "open _P_rivate window"):
   "     " For normal, insert, and visual modes:
-  "     let g:dubs_web_hatch_open_incognito_seq = "<Leader>P"
+  "     let g:vim_web_hatch_open_incognito_seq = "<Leader>P"
   "     " For select modes:
-  "     let g:dubs_web_hatch_maps.incognito.nmap = "<Leader>P"
-  "     let g:dubs_web_hatch_maps.incognito.imap = "<Leader>P"
-  "     let g:dubs_web_hatch_maps.incognito.vmap = "<Leader>P"
+  "     let g:vim_web_hatch_maps.incognito.nmap = "<Leader>P"
+  "     let g:vim_web_hatch_maps.incognito.imap = "<Leader>P"
+  "     let g:vim_web_hatch_maps.incognito.vmap = "<Leader>P"
   call <SID>place_binding_web_open_url_incognito()
 endfunction
 
-" USAGE: Set g:dubs_web_hatch_* variable(s) to your liking, then
+" USAGE: Set g:vim_web_hatch_* variable(s) to your liking, then
 " call setup function to wire 'em all:
 "
 "   call DubsWebHatchSetup()

@@ -68,7 +68,7 @@ By default, each command opens a new browser tab in new window.
 - To instead prefer opening a new tab in an existing window,
   set the following global variable to nonzero, e.g.,::
 
-    g:dubs_web_hatch_use_tab = 1
+    g:vim_web_hatch_use_tab = 1
 
 User Profile
 ------------
@@ -78,7 +78,7 @@ By default, when Chrome is opened, the default user profile is used.
 - To instead open a window using the most recently used profile,
   set the following global variable to nonzero, e.g.,::
 
-    g:dubs_web_hatch_mru_profile = 1
+    g:vim_web_hatch_mru_profile = 1
 
 Supported Browsers
 ------------------
