@@ -34,34 +34,43 @@ let g:loaded_dubs_web_hatch_plugin = 1
 " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 function! s:reset_binding_search_web_for_selection()
-  silent! unmap <Leader>W
-  silent! iunmap <Leader>W
-  silent! vunmap <Leader>W
+  exe "silent! unmap " .. g:dubs_web_hatch_google_search_seq
+  exe "silent! iunmap " .. g:dubs_web_hatch_google_search_seq
+  exe "silent! vunmap " .. g:dubs_web_hatch_google_search_seq
 endfunction
 
 " E.g.,
 "   https://www.google.com/search?q=<TERM>
 function! s:place_binding_search_web_for_selection()
+  if !exists("g:dubs_web_hatch_google_search_seq")
+    " Traditional default: \W opens browser to text search.
+    g:dubs_web_hatch_google_search_seq = "<Leader>W"
+  elseif empty(g:dubs_web_hatch_google_search_seq)
+
+    return
+  endif
+
+  " ***
+
   call <SID>reset_binding_search_web_for_selection()
 
   " [lb]: Cannot not specify http, i.e., Chrome tries to open term as
   " URL, rather than send to default search engine, when invoked thru
   " sensible-browser (as opposed to typing a term in the location bar
   " and the browser deciding if it is a URL or if it is search text).
-  noremap <Leader>W
-    \ :call <SID>web_open_url('https://www.google.com/search?q=<C-R><C-W>', 0)<CR>
-  inoremap <silent> <Leader>W
-    \ <C-O>:call <SID>web_open_url('https://www.google.com/search?q=<C-R><C-W>', 0)<CR>
+  exe "noremap " .. g:dubs_web_hatch_google_search_seq ..
+    \ " :call <SID>web_open_url('https://www.google.com/search?q=<C-R><C-W>', 0)<CR>"
+  exe "inoremap <silent> " .. g:dubs_web_hatch_google_search_seq ..
+    \ " <C-O>:call <SID>web_open_url('https://www.google.com/search?q=<C-R><C-W>', 0)<CR>"
   " Interesting: C-U clears the command line, which contains cruft, e.g., '<,'>
   " gv selects the previous Visual area.
   " y yanks the selected text into the default register.
   " <Ctrl-R>" puts the yanked text into the command line.
-  vnoremap <silent> <Leader>W :<C-U>
-    \ <CR>gvy
-    \ :<C-U>call <SID>web_open_url('https://www.google.com/search?q=<C-R>"', 0)<CR>
+  exe "vnoremap <silent> " .. g:dubs_web_hatch_google_search_seq ..
+    \ " :<C-U>" ..
+    \ "<CR>gvy" ..
+    \ ":<C-U>call <SID>web_open_url('https://www.google.com/search?q=<C-R>\"', 0)<CR>"
 endfunction
-
-call <SID>place_binding_search_web_for_selection()
 
 " -------------------------------------------------------------------
 
@@ -70,27 +79,37 @@ call <SID>place_binding_search_web_for_selection()
 " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 function! s:reset_binding_search_web_for_definition()
-  silent! unmap <Leader>D
-  silent! iunmap <Leader>D
-  silent! vunmap <Leader>D
+  exe "silent! unmap " .. g:dubs_web_hatch_google_define_seq
+  exe "silent! iunmap " .. g:dubs_web_hatch_google_define_seq
+  exe "silent! vunmap " .. g:dubs_web_hatch_google_define_seq
 endfunction
 
 " E.g.,
 "   https://www.google.com/search?q=define+<TERM>
 function! s:place_binding_search_web_for_definition()
+  if !exists("g:dubs_web_hatch_google_define_seq")
+    " Traditional default: \D opens browser to text definition.
+    g:dubs_web_hatch_google_define_seq = "<Leader>D"
+  elseif empty(g:dubs_web_hatch_google_define_seq)
+
+    return
+  endif
+
+  " ***
+
   call <SID>reset_binding_search_web_for_definition()
 
-  " [lb]: Copied-paste of other binding fcns., except `define+` addition.
-  noremap <silent> <Leader>D
-    \ :call <SID>web_open_url('https://www.google.com/search?q=define+<C-R><C-W>', 0)<CR>
-  inoremap <silent> <Leader>D
-    \ <C-O>:call <SID>web_open_url('https://www.google.com/search?q=define+<C-R><C-W>', 0)<CR>
-  vnoremap <silent> <Leader>D :<C-U>
-    \ <CR>gvy
-    \ :<C-U>call <SID>web_open_url('https://www.google.com/search?q=define+<C-R>"', 0)<CR>
+  " [lb]: Almost same as place_binding_search_web_for_selection, above,
+  " w/ `define+` added.
+  exe "noremap <silent> " .. g:dubs_web_hatch_google_define_seq ..
+    \ " :call <SID>web_open_url('https://www.google.com/search?q=define+<C-R><C-W>', 0)<CR>"
+  exe "inoremap <silent> " .. g:dubs_web_hatch_google_define_seq ..
+    \ " <C-O>:call <SID>web_open_url('https://www.google.com/search?q=define+<C-R><C-W>', 0)<CR>"
+  exe "vnoremap <silent> " .. g:dubs_web_hatch_google_define_seq ..
+    \ " :<C-U>" ..
+    \ "<CR>gvy" ..
+    \ ":<C-U>call <SID>web_open_url('https://www.google.com/search?q=define+<C-R>\"', 0)<CR>"
 endfunction
-
-call <SID>place_binding_search_web_for_definition()
 
 " -------------------------------------------------------------------
 
@@ -415,57 +434,133 @@ endfunction
 " -------------------------------------------------------------------
 
 function! s:reset_binding_web_open_url()
-  silent! unmap gW
-
-  silent! unmap <Leader>T
-  silent! iunmap <Leader>T
-  silent! vunmap <Leader>T
+  exe "silent! unmap " .. g:dubs_web_hatch_open_url_seq
+  exe "silent! iunmap " .. g:dubs_web_hatch_open_url_seq
+  exe "silent! vunmap " .. g:dubs_web_hatch_open_url_seq
 endfunction
 
+" ALTLY: Use `sensible-browser` or `sensible-open`:
+"   " Note that we must escape the shell command argument, e.g., if you select this URL:
+"   "   http://example.com/#foo
+"   " a simple mapping like:
+"   "   vnoremap <Leader>T y:!sensible-browser '<C-R>"'<CR>
+"   " will fail on the pound sign/octothorpe/hash symbol, complaining
+"   "   E499: Empty file name for '%' or '#', only works with ":p:h"
+"   if executable("sensible-browser")
+"     " Linux (or at least Debian) built-in.
+"     vnoremap <silent> <Leader>T y:execute "!sensible-browser " .. shellescape('<C-R>"', 1)<CR>
+"   elseif executable("sensible-open")
+"     " https://github.com/landonb/sh-sensible-open#☔
+"     vnoremap <silent> <Leader>T y:execute "!sensible-open " .. shellescape('<C-R>"', 1)<CR>
+"   else
+"     vnoremap <silent> <Leader>T y:call <SID>web_open_url('<C-r>"', 0)<CR>
+"   endif
+
 function! s:place_binding_web_open_url()
+  if !exists("g:dubs_web_hatch_open_url_seq")
+    " Traditional default: <Leader>T opens URL under cursor/selected.
+    g:dubs_web_hatch_open_url_seq = "<Leader>T"
+  elseif empty(g:dubs_web_hatch_open_url_seq)
+
+    return
+  endif
+
+  " ***
+
   call <SID>reset_binding_web_open_url()
+
+  exe "nnoremap " .. g:dubs_web_hatch_open_url_seq ..
+    \ " :call <SID>web_open_url('', 0)<CR>"
+  exe "inoremap " .. g:dubs_web_hatch_open_url_seq ..
+    \ " <C-O>:call <SID>web_open_url('', 0)<CR>"
+  exe "vnoremap <silent> " .. g:dubs_web_hatch_open_url_seq ..
+    \ " y:call <SID>web_open_url('<C-r>\"', 0)<CR>"
+endfunction
+
+" *** Bonus mapping
+
+function! s:reset_binding_web_open_url_bonus()
+  exe "silent! unmap " .. g:dubs_web_hatch_open_url_bonus_seq
+endfunction
+
+function! s:place_binding_web_open_url_bonus()
+  if !exists("g:dubs_web_hatch_open_url_bonus_seq")
+    " Traditional default: gW opens URL under cursor/selected.
+    g:dubs_web_hatch_open_url_bonus_seq = "gW"
+  elseif empty(g:dubs_web_hatch_open_url_bonus_seq)
+
+    return
+  endif
+
+  " ***
+
+  call <SID>reset_binding_web_open_url_bonus()
 
   " 2020-05-10: I (finally) learned about Vim's builtin `gf` (and `gF`), and now
   " I'm thinking that maybe `gW` makes sense ("go Web"), which is not mapped by Vim.
-  " - So trying gW, but leaving historic \T that's been wired for a spell,
-  "   especially because <Leader>T is wired is multiple modes modes.
-  nnoremap gW :call <SID>web_open_url('', 0)<CR>
-
-  nnoremap <Leader>T :call <SID>web_open_url('', 0)<CR>
-  inoremap <Leader>T <C-O>:call <SID>web_open_url('', 0)<CR>
-  vnoremap <silent> <Leader>T y:call <SID>web_open_url('<C-r>"', 0)<CR>
-  " ALTLY: Use `sensible-browser` or `sensible-open`:
-  "   " Note that we must escape the shell command argument, e.g., if you select this URL:
-  "   "   http://example.com/#foo
-  "   " a simple mapping like:
-  "   "   vnoremap <Leader>T y:!sensible-browser '<C-R>"'<CR>
-  "   " will fail on the pound sign/octothorpe/hash symbol, complaining
-  "   "   E499: Empty file name for '%' or '#', only works with ":p:h"
-  "   if executable("sensible-browser")
-  "     " Linux (or at least Debian) built-in.
-  "     vnoremap <silent> <Leader>T y:execute "!sensible-browser " .. shellescape('<C-R>"', 1)<CR>
-  "   elseif executable("sensible-open")
-  "     " https://github.com/landonb/sh-sensible-open#☔
-  "     vnoremap <silent> <Leader>T y:execute "!sensible-open " .. shellescape('<C-R>"', 1)<CR>
-  "   else
-  "     vnoremap <silent> <Leader>T y:call <SID>web_open_url('<C-r>"', 0)<CR>
-  "   endif
+  " - So trying gW, but leaving historic \T sequence that's been wired for a spell,
+  "   especially because <Leader>T is wired in multiple modes modes.
+  " MAYBE/2024-12-08 19:48: Use vim-async-mapper to wire `gW` imap.
+  exe "nnoremap " .. g:dubs_web_hatch_open_url_bonus_seq ..
+    \ " :call <SID>web_open_url('', 0)<CR>"
 endfunction
-
-call <SID>place_binding_web_open_url()
 
 " -------------------------------------------------------------------
 
 function! s:reset_binding_web_open_url_incognito()
-  " 2020-09-01: (lb): Unbound/Available: gS, g!. Taken: gP, g@, g#...
-  silent! unmap g!
+  ext "silent! unmap " .. g:dubs_web_hatch_open_incognito_seq
 endfunction
 
 function! s:place_binding_web_open_url_incognito()
+  if !exists("g:dubs_web_hatch_open_incognito_seq")
+    " Traditional default: g! opens URL in incognito window.
+    " - 2020-09-01: (lb): Unbound/Available: gS, g!. Taken: gP, g@, g#...
+    g:dubs_web_hatch_open_incognito_seq = "g!"
+  elseif empty(g:dubs_web_hatch_open_incognito_seq)
+
+    return
+  endif
+
+  " ***
+
   call <SID>reset_binding_web_open_url_incognito()
 
-  nnoremap g! :call <SID>web_open_url('', 1)<CR>
+  exe "nnoremap " .. g:dubs_web_hatch_open_incognito_seq .. " :call <SID>web_open_url('', 1)<CR>"
 endfunction
 
-call <SID>place_binding_web_open_url_incognito()
+" -------------------------------------------------------------------
+
+function! DubsWebHatchSetup() abort
+  " Wire, e.g., <Leader>W to Google search on term under cursor/selected,
+  " for normal, insert, and visual modes.
+  " - USAGE: E.g.:
+  "   let g:dubs_web_hatch_google_search_seq = "<Leader>W"
+  call <SID>place_binding_search_web_for_selection()
+
+  " Wire, e.g., <Leader>D to Google define on term under cursor/selected,
+  " for normal, insert, and visual modes.
+  " - USAGE: E.g.:
+  "   let g:dubs_web_hatch_google_define_seq = "<Leader>D"
+  call <SID>place_binding_search_web_for_definition()
+
+  " Wire, e.g., g! to open URL under cursor in incognito window,
+  " for normal mode only.
+  " - USAGE: E.g.:
+  "   let g:dubs_web_hatch_open_url_seq = "<Leader>T"
+  call <SID>place_binding_web_open_url()
+  " A bonus normal mode mapping.
+  "   let g:dubs_web_hatch_open_url_bonus_seq = "gW"
+  call <SID>place_binding_web_open_url_bonus()
+
+  " Wire, e.g., g! to open URL under cursor in incognito window,
+  " for normal mode only.
+  " - USAGE: E.g.:
+  "   let g:dubs_web_hatch_open_incognito_seq = "g!"
+  call <SID>place_binding_web_open_url_incognito()
+endfunction
+
+" USAGE: Set g:dubs_web_hatch_* variable(s) to your liking, then
+" call setup function to wire 'em all:
+"
+"   call DubsWebHatchSetup()
 
