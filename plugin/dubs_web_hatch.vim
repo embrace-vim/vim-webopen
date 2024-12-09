@@ -5,15 +5,20 @@
 
 " -------------------------------------------------------------------
 
-" YOU: Uncomment next 'unlet', then <F9> to reload this file.
-"      (Iff: https://github.com/landonb/vim-source-reloader)
+" USAGE: After editing this plugin, you can reload it on the fly with
+"        https://github.com/landonb/vim-source-reloader#↩️
+" - Uncomment this `unlet` (or disable the `finish`) and hit <F9>.
 "
-"  silent! unlet g:plugin_dubs_web_hatch
+" silent! unlet g:loaded_dubs_web_hatch_plugin
 
-if exists("g:plugin_dubs_web_hatch") || &cp
+if exists("g:loaded_dubs_web_hatch_plugin") || &cp
+
   finish
 endif
-let g:plugin_dubs_web_hatch = 1
+
+let g:loaded_dubs_web_hatch_plugin = 1
+
+" -------------------------------------------------------------------
 
 " MAYBE/2020-05-10 14:04: Add g:global_variable for choosing URL opener,
 " or make distro-specific choice, e.g.,
