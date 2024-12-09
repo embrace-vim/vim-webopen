@@ -264,7 +264,7 @@ endfunction
 "   to handle special URLs, like Spotify, e.g.,
 "       spotify:track:6JEK0CvvjDjjMUBFoXShNZ
 "   which is novel, but not a feature that I see myself starting to use.
-function! s:web_open_url(suggested_uri, incognito)
+function! embrace#browser#web_open_url(suggested_uri, incognito)
   let l:uri = s:use_suggested_uri_or_parse_line(a:suggested_uri)
 
   if l:uri == ""

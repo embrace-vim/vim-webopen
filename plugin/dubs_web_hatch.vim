@@ -70,7 +70,7 @@ function! s:place_binding_search_web_for_selection()
   " Note that Chrome opens the URL as-is, i.e., it's not like the location
   " bar where Chrome will search Google instead if the location is missing
   " a 'scheme://'. So specify the complete URL.
-  let l:n_cmd = ":call <SID>web_open_url('https://www.google.com/search?q=<C-R><C-W>', 0)<CR>"
+  let l:n_cmd = ":call embrace#browser#web_open_url('https://www.google.com/search?q=<C-R><C-W>', 0)<CR>"
   let l:i_cmd = "<C-O>" .. n_cmd
   " SAVVY: C-U clears the command line, which contains cruft, e.g., '<,'>
   " - gv selects the previous Visual area.
@@ -79,7 +79,7 @@ function! s:place_binding_search_web_for_selection()
   let l:v_cmd =
     \ " :<C-U>" ..
     \ "<CR>gvy" ..
-    \ ":<C-U>call <SID>web_open_url('https://www.google.com/search?q=<C-R>\"', 0)<CR>"
+    \ ":<C-U>call embrace#browser#web_open_url('https://www.google.com/search?q=<C-R>\"', 0)<CR>"
 
   " Traditional default: \W opens browser to Google search of selected text.
   call embrace#multimap#create_maps(
@@ -142,7 +142,7 @@ endfunction
 function! s:place_binding_search_web_for_definition()
   " [lb]: Almost same as s:place_binding_search_web_for_selection, above,
   " but with `define+` added.
-  let l:n_cmd = ":call <SID>web_open_url('https://www.google.com/search?q=define+<C-R><C-W>', 0)<CR>"
+  let l:n_cmd = ":call embrace#browser#web_open_url('https://www.google.com/search?q=define+<C-R><C-W>', 0)<CR>"
   let l:i_cmd = "<C-O>" .. n_cmd
   " SAVVY: C-U clears the command line, which contains cruft, e.g., '<,'>
   " - gv selects the previous Visual area.
@@ -151,7 +151,7 @@ function! s:place_binding_search_web_for_definition()
   let l:v_cmd =
     \ " :<C-U>" ..
     \ "<CR>gvy" ..
-    \ ":<C-U>call <SID>web_open_url('https://www.google.com/search?q=define+<C-R>\"', 0)<CR>"
+    \ ":<C-U>call embrace#browser#web_open_url('https://www.google.com/search?q=define+<C-R>\"', 0)<CR>"
 
   " Traditional default: \D opens browser to Google define of selected text.
   call embrace#multimap#create_maps(
@@ -226,13 +226,13 @@ endfunction
 "     “ https://github.com/landonb/sh-sensible-open#☔
 "     vnoremap <silent> <Leader>T y:execute '!sensible-open ' .. shellescape('<C-R>"', 1)<CR>
 "   else
-"     vnoremap <silent> <Leader>T y:call <SID>web_open_url('<C-r>"', 0)<CR>
+"     vnoremap <silent> <Leader>T y:call embrace#browser#web_open_url('<C-r>"', 0)<CR>
 "   endif
 
 function! s:place_binding_web_open_url()
-  let l:n_cmd = ":call <SID>web_open_url('', 0)<CR>"
+  let l:n_cmd = ":call embrace#browser#web_open_url('', 0)<CR>"
   let l:i_cmd = "<C-O>" .. n_cmd
-  let l:v_cmd = "y:call <SID>web_open_url('<C-r>\"', 0)<CR>"
+  let l:v_cmd = "y:call embrace#browser#web_open_url('<C-r>\"', 0)<CR>"
 
   " Traditional default: <Leader>T opens URL under cursor/selected.
   call embrace#multimap#create_maps(
@@ -301,9 +301,9 @@ endfunction
 "   not matter too much what the default is.
 
 function! s:place_binding_web_open_url_incognito()
-  let l:n_cmd = ":call <SID>web_open_url('', 1)<CR>"
+  let l:n_cmd = ":call embrace#browser#web_open_url('', 1)<CR>"
   let l:i_cmd = "<C-O>" .. n_cmd
-  let l:v_cmd = "y:call <SID>web_open_url('<C-r>\"', 1)<CR>"
+  let l:v_cmd = "y:call embrace#browser#web_open_url('<C-r>\"', 1)<CR>"
 
   " Defaults <Leader>P to open URL under cursor/selected in private window.
   call embrace#multimap#create_maps(
