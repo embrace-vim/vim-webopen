@@ -106,7 +106,6 @@ call <SID>place_binding_search_web_for_definition()
 let s:dubs_web_hatch_plugin_path = fnamemodify(resolve(expand('<sfile>:p')), ':h')
 
 function! s:macOS_which_browser()
-  "  echom s:dubs_web_hatch_plugin_path
   " 2020-09-01: (lb): Not worrying about path separator.
   "             (Vim handles, right? That, or '/' works on Windows.)
   " Ref: fnamemodify(..., ':h'): See: :h filename-modifiers.
@@ -122,10 +121,6 @@ function! s:macOS_which_browser()
   "  echom l:handler
   return l:handler
 endfunction
-
-" function! MacOS_which_browser()
-"   call <SID>macOS_which_browser()
-" endfunction
 
 function! s:default_browser()
   if has('macunix')
