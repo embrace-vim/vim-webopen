@@ -321,7 +321,7 @@ endfunction
 " Public setup function — Call from your user code to setup this plugin
 " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-function! VimWebHatchSetup() abort
+function! embrace#vim_web_hatch#create_maps() abort
   " The following USAGE examples assume config dictionary setup thusly:
   "   let g:vim_web_hatch_maps = {}
   "   let g:vim_web_hatch_maps.open = {}
@@ -373,5 +373,5 @@ endfunction
 " USAGE: Set g:vim_web_hatch_* variable(s) to your liking, then
 " call setup function to wire 'em all:
 "
-"   call VimWebHatchSetup()
+"   call embrace#vim_web_hatch#create_maps()
 
