@@ -57,8 +57,12 @@ function! s:macOS_which_browser()
   let l:plugbin = fnamemodify(s:vim_web_hatch_plugin_path, ':h:h') . '/' . 'bin'
   "  echom l:plugbin
   let l:whicher = l:plugbin . '/' . 'macOS-which-browser'
-  " MEH: On Windows, use 2>NUL instead.
-  let l:syscmmd = l:whicher . ' 2>/dev/null'
+  " REFER: See :h feature-list / Note that Cygwin is 'win32unix'.
+  if has('win32')
+    let l:syscmmd = l:whicher . ' 2>NUL'
+  else
+    let l:syscmmd = l:whicher . ' 2>/dev/null'
+  endif
   "  echom l:whicher
   let l:handler = system(l:syscmmd)
   " Hrmm, don't see this set like I'd expect on Linux:
