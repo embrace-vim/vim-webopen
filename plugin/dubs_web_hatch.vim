@@ -271,7 +271,7 @@ endfunction
 "       https://daringfireball.net/2010/07/improved_regex_for_matching_urls
 "   But so far I've run across no limitations with the simpler regex used here.
 " - The (an)other plugin also claims to work when two URLs are on the same row, e.g.,
-"       " http://example.com/#foo and http://example.com/?foo=bar#baz "
+"       ' http://example.com/#foo and http://example.com/?foo=bar#baz '
 "   but when I tested, all I saw was the line being echoed, and nothing more.
 "   - With the code herein, if 2 URLs are on the same line, the first is opened.
 "   - Which is fine for my use case: I have URLs in notes files, but never two
@@ -286,19 +286,19 @@ endfunction
 " - There's also the Vim builtin `gx`, but I have issues with `gx` always
 "   calling `wget` on the URL, no matter how I configure it.
 "   - For instance, even when I specified the browser opener:
-"       let g:netrw_browsex_viewer = "sensible-browser"
+"       let g:netrw_browsex_viewer = 'sensible-browser'
 "     `gx` would still `wget` the resource first, and then open the temporary
 "     download file path in my browser. Heh?!
 "     - I also tried other vectors:
 "       - This wgets the URL under cursor to /tmp/some-dir/, then replaces
 "         my open file in Vim with a blank file (and Ctrl-j doesn't go back!):
-"           let g:netrw_browsex_viewer = "xdg-open"
+"           let g:netrw_browsex_viewer = 'xdg-open'
 "       - This opens the downloaded resource to a GUI text editor (not Vim):
-"           let g:netrw_browsex_viewer = "setsid xdg-open"
+"           let g:netrw_browsex_viewer = 'setsid xdg-open'
 "       - This opens the dowloaded resource in my browser, with a temporary path,
 "         e.g., file:///tmp/vuzpUag/116, and also replaces current Vim buffer with
 "         a new one (closing/wiping the previous buffer, so Ctrl-J does nothing):
-"           let g:netrw_browsex_viewer = "sensible-browser"
+"           let g:netrw_browsex_viewer = 'sensible-browser'
 " - This leaves only one feature that the (an)other plugin offers, which is
 "   to handle special URLs, like Spotify, e.g.,
 "       spotify:track:6JEK0CvvjDjjMUBFoXShNZ
