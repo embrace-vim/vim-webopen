@@ -27,6 +27,8 @@ let g:loaded_dubs_web_hatch_plugin = 1
 "     let g:dubs_web_hatch_open = 'sensible-browser'
 "   ...
 
+" -------------------------------------------------------------------
+
 " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 " Search Web for Selection, or Word Under Cursor
 " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -61,6 +63,8 @@ endfunction
 
 call <SID>place_binding_search_web_for_selection()
 
+" -------------------------------------------------------------------
+
 " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 " Search Web for Definition of Selection, or Word Under Cursor
 " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -87,6 +91,8 @@ function! s:place_binding_search_web_for_definition()
 endfunction
 
 call <SID>place_binding_search_web_for_definition()
+
+" -------------------------------------------------------------------
 
 " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 " Open selected URL
@@ -360,7 +366,7 @@ function! s:open_browser_window(uri, incognito)
   redraw!
 endfunction
 
-" +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ "
+" -------------------------------------------------------------------
 
 " MEH/2021-01-28: I ported previous macOS browser functionality to a new
 " shell project, found at https://github.com/landonb/sh-sensible-open#☔
@@ -388,7 +394,7 @@ endfunction
 "     endif
 "   endfunction
 
-" +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ "
+" -------------------------------------------------------------------
 
 function! s:reset_binding_web_open_url()
   silent! unmap gW
@@ -434,6 +440,8 @@ function! s:place_binding_web_open_url()
 endfunction
 
 call <SID>place_binding_web_open_url()
+
+" -------------------------------------------------------------------
 
 function! s:place_binding_web_open_url_incognito()
   call <SID>reset_binding_web_open_url_incognito()
