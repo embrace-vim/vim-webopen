@@ -151,7 +151,7 @@ function! s:default_browser()
 
       return "chrome"
     endif
-  else
+  elseif executable("sensible-browser")
     " Linux.
     " (lb): `echo $BROWSER` shows nothing, so ask sensible-browser, I suppose.
     let l:handler = system('sensible-browser --version')
@@ -248,7 +248,7 @@ function! s:browser_cmd(which_browser, options)
     if a:options != ""
       let l:browpener = l:browpener . " --args"
     endif
-  else
+  elseif executable("sensible-browser")
     let l:browpener = "sensible-browser"
   endif
   
