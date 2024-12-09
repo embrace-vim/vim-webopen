@@ -52,8 +52,9 @@ let s:vim_web_hatch_plugin_path = fnamemodify(resolve(expand('<sfile>:p')), ':h'
 function! s:macOS_which_browser()
   " 2020-09-01: (lb): Not worrying about path separator.
   "             (Vim handles, right? That, or '/' works on Windows.)
-  " Ref: fnamemodify(..., ':h'): See: :h filename-modifiers.
-  let l:plugbin = fnamemodify(s:vim_web_hatch_plugin_path, ':h') . '/' . 'bin'
+  " REFER: fnamemodify(..., ':h'): See: :h filename-modifiers
+  "        - ':h:h' removes 'autoload/embrace/' to get project root.
+  let l:plugbin = fnamemodify(s:vim_web_hatch_plugin_path, ':h:h') . '/' . 'bin'
   "  echom l:plugbin
   let l:whicher = l:plugbin . '/' . 'macOS-which-browser'
   " MEH: On Windows, use 2>NUL instead.
