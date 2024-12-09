@@ -9,14 +9,14 @@
 "        https://github.com/landonb/vim-source-reloader#↩️
 " - Uncomment this `unlet` (or disable the `finish`) and hit <F9>.
 "
-" silent! unlet g:loaded_vim_web_hatch_plugin
+" silent! unlet g:loaded_vim_web_hatch_autoload_vim_web_hatch
 
-if exists("g:loaded_vim_web_hatch_plugin") || &cp
+if exists("g:loaded_vim_web_hatch_autoload_vim_web_hatch") || &cp
 
   finish
 endif
 
-let g:loaded_vim_web_hatch_plugin = 1
+let g:loaded_vim_web_hatch_autoload_vim_web_hatch = 1
 
 " -------------------------------------------------------------------
 
