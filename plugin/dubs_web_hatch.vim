@@ -151,6 +151,8 @@ function! s:macOS_which_browser()
   return l:handler
 endfunction
 
+" ***
+
 function! s:default_browser()
   if has('macunix')
     let l:handler = <SID>macOS_which_browser()
@@ -203,6 +205,8 @@ function! s:default_browser()
   return ""
 endfunction
 
+" ***
+
 function! s:browopts_incognito(which_browser, options, incognito)
   let l:options = a:options
 
@@ -217,6 +221,8 @@ function! s:browopts_incognito(which_browser, options, incognito)
   return l:options
 endfunction
 
+" ***
+
 function! s:browopts_new_window(which_browser, options)
   let l:options = a:options
 
@@ -229,6 +235,8 @@ function! s:browopts_new_window(which_browser, options)
   return l:options
 endfunction
 
+" ***
+
 function! s:browopts_profile_dir(which_browser, options)
   let l:options = a:options
 
@@ -240,6 +248,8 @@ function! s:browopts_profile_dir(which_browser, options)
 
   return l:options
 endfunction
+
+" ***
 
 " - Sending arguments to macOS browser requires two options to `open`.
 "   - A basic `open -a 'Google Chrome' URL` opens a URL in new tab of
@@ -282,6 +292,8 @@ function! s:browser_cmd(which_browser, options)
   
   return l:browpener
 endfunction
+
+" ***
 
 " - The following web_open_url() function is inspired by:
 "       https://stackoverflow.com/a/53817071
@@ -343,6 +355,8 @@ function! s:web_open_url(suggested_uri, incognito)
   call s:open_browser_window(l:uri, a:incognito)
 endfunction
 
+" ***
+
 function! s:use_suggested_uri_or_parse_line(uri)
   if a:uri != ""
 
@@ -370,6 +384,8 @@ function! s:use_suggested_uri_or_parse_line(uri)
   "                                            ││││ │ ││       │├││─││───│─────────────────────────────────────┘
   return matchstr(getline("."), '[a-z]*:\/\/[^ >;()\[\]]\{-}\([.,;)\]"'."'".']\?\($\|[[:space:]]\)\)\@=')
 endfunction
+
+" ***
 
 function! s:open_browser_window(uri, incognito)
   let l:which_browser = <SID>default_browser()
