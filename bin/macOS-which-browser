@@ -27,7 +27,7 @@ macOS_which_browser () {
   fi
 
   # Copy the Property List to a temporary location, before transforming it.
-  local tempfile="$(mktemp -t dubs_web_hatch--com.apple.launchservices.secure.plist--XXXXX)"
+  local tempfile="$(mktemp -t vim-web-hatch--com.apple.launchservices.secure.plist--XXXXX)"
 
   command cp -f -- "${proplist}" "${tempfile}"
 
