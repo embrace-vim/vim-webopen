@@ -1,6 +1,6 @@
 *vim_web_hatch.txt*	`gf`-like URL openers.	2024 Dec 09
 
-VIM WEB HATCH: Add normal, insert, and visual mode URL openers.~
+VIM WEB HATCH 🐣 Add normal, insert, and visual mode URL openers~
 
 VIM WEB HATCH					*vim-web-hatch*
 
