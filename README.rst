@@ -189,8 +189,8 @@ can build the dictionary one key-value at a time.
 
     call embrace#vim_web_hatch#create_maps()
 
-.. |vim-web-hatch-config| replace:: ``https://github.com/DepoXy/depoxy/blob/release/home/.vim/pack/DepoXy/start/vim-depoxy/plugin/vim-web-hatch-config.vim``
-.. _vim-web-hatch-config: https://github.com/DepoXy/depoxy/blob/release/home/.vim/pack/DepoXy/start/vim-depoxy/plugin/vim-web-hatch-config.vim
+.. |vim-web-hatch-config| replace:: ``https://github.com/DepoXy/depoxy/blob/1.7.0/home/.vim/pack/DepoXy/start/vim-depoxy/plugin/vim-web-hatch-config.vim``
+.. _vim-web-hatch-config: https://github.com/DepoXy/depoxy/blob/1.7.0/home/.vim/pack/DepoXy/start/vim-depoxy/plugin/vim-web-hatch-config.vim
 
 (You can see a real-world implementation in
 |vim-web-hatch-config|_.)
