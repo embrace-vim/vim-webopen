@@ -285,7 +285,7 @@ endfunction
 "   key sequences and which modes they want to map. So it really should
 "   not matter too much what the default is.
 
-function! s:place_binding_web_open_url_incognito()
+function! s:CreateMaps_WebOpenIncognito()
   let l:n_cmd = ":call embrace#browser#WebOpenUrl('', 1)<CR>"
   let l:i_cmd = "<C-O>" .. n_cmd
   let l:v_cmd = "y:call embrace#browser#WebOpenUrl('<C-r>\"', 1)<CR>"
@@ -352,7 +352,7 @@ function! g:embrace#webopen#CreateMaps() abort
   "     let g:vim_webopen_maps.incognito.nmap = "<Leader>P"
   "     let g:vim_webopen_maps.incognito.imap = "<Leader>P"
   "     let g:vim_webopen_maps.incognito.vmap = "<Leader>P"
-  call <SID>place_binding_web_open_url_incognito()
+  call s:CreateMaps_WebOpenIncognito()
 endfunction
 
 " USAGE: Set g:vim_webopen_* variable(s) to your liking, then
