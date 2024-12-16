@@ -201,7 +201,7 @@ endfunction
 
 " ***
 
-" - The following web_open_url() function is inspired by:
+" - The following WebOpenUrl() function is inspired by:
 "       https://stackoverflow.com/a/53817071
 "   albeit I fixed an issue with shellescape being called before checking for
 "   the empty string (which shellescape would put quotes around, so it'd no
@@ -249,7 +249,7 @@ endfunction
 "   to handle special URLs, like Spotify, e.g.,
 "       spotify:track:6JEK0CvvjDjjMUBFoXShNZ
 "   which is novel, but not a feature that I see myself starting to use.
-function! embrace#browser#web_open_url(suggested_uri, incognito)
+function! embrace#browser#WebOpenUrl(suggested_uri, incognito)
   let l:uri = s:use_suggested_uri_or_parse_line(a:suggested_uri)
 
   if l:uri == ""
@@ -346,10 +346,10 @@ endfunction
 " DRY, and any changes you make here you might want to port to t'other.
 "
 " For the novelty of it, here's how we could simplify this plugin if we
-" replaced the complicated web_open_url above with a simpler call to the
+" replaced the complicated WebOpenUrl above with a simpler call to the
 " shell command:
 "
-"   function! s:web_open_url(incognito)
+"   function! s:WebOpenUrl(incognito)
 "     let l:uri = matchstr(getline('.'), '[a-z]*:\/\/[^ >,;()]*')
 "     if l:uri != ''
 "       let l:uri = shellescape(l:uri, 1)
