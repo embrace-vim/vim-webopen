@@ -143,7 +143,7 @@ endfunction
 
 " ***
 
-function! s:browopts_profile_dir(which_browser, options)
+function! s:GetOptionsProfileDir(which_browser, options)
   let l:options = a:options
 
   if !exists("g:vim_webopen_mru_profile") || g:vim_webopen_mru_profile == 0
@@ -309,7 +309,7 @@ function! s:OpenBrowserWindow(uri, incognito)
   " Add new window flag, usually, unless disabled via g:vim_webopen_use_tab.
   let l:options = s:GetOptionsNewWindow(l:which_browser, l:options)
   " Tell Chrome to use default user profile, unless g:vim_webopen_mru_profile.
-  let l:options = <SID>browopts_profile_dir(l:which_browser, l:options)
+  let l:options = s:GetOptionsProfileDir(l:which_browser, l:options)
 
   let l:browpener = <SID>browser_cmd(l:which_browser, options)
 
