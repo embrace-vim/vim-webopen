@@ -1,6 +1,6 @@
 *vim_webopen.txt*	`gf`-like URL openers.	2024 Dec 09
 
-VIM WEBOPEN 🐣 Add normal, insert, and visual mode URL openers~
+VIM WEBOPEN 🐣 Open URLs in external browser~
 
 VIM WEBOPEN					*vim-webopen*
 
@@ -16,12 +16,11 @@ VIM WEBOPEN					*vim-webopen*
 
 About Vim Webopen~
 
-Simple URL opener with search and word definition options.
+Open URLs from Vim. Or search the web, define words, or use an incognito
+(private) window.
 
-At its core, opens a location in your default browser.
-
-It can also Google search or define a selected word, or open
-a URL in an incognito (private) window.
+Use this plugin to define your choice of normal, insert, and visual mode
+commands and their key sequences.
 
 ==============================================================================
 2. Plugin Initialization			*vim-webopen-initialize*

@@ -2,12 +2,11 @@
 Open URLs in external browser 🐣
 ################################
 
-Simple URL opener for Vim with search and word definition options.
+Open URLs from Vim. Or search the web, define words, or use an incognito
+(private) window.
 
-Defines command maps to open a location in your default browser.
-
-It can also Google search or define a selected word, or open
-a URL in an incognito (private) window.
+Use this plugin to define your choice of normal, insert, and visual mode
+commands and their key sequences.
 
 Initialization
 ==============
