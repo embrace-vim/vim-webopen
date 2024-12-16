@@ -43,15 +43,15 @@ function! s:CreateModeMaps(maps_key, solo_var, default_seq, n_cmd, i_cmd, v_cmd)
     let l:val_type = type(l:feature_val)
 
     if l:val_type == v:t_string || l:val_type == v:t_list
-      let l:all_keys = s:listify(l:feature_val, l:maps_var)
+      let l:all_keys = s:Listify(l:feature_val, l:maps_var)
 
       let l:n_keys = all_keys
       let l:i_keys = all_keys
       let l:v_keys = all_keys
     elseif l:val_type == v:t_dict
-      let l:n_keys = s:listify(get(l:feature_val, "nmap", []), l:maps_var)
-      let l:i_keys = s:listify(get(l:feature_val, "imap", []), l:maps_var)
-      let l:v_keys = s:listify(get(l:feature_val, "vmap", []), l:maps_var)
+      let l:n_keys = s:Listify(get(l:feature_val, "nmap", []), l:maps_var)
+      let l:i_keys = s:Listify(get(l:feature_val, "imap", []), l:maps_var)
+      let l:v_keys = s:Listify(get(l:feature_val, "vmap", []), l:maps_var)
     else
       echom "ALERT: vim-web-hatch: Unrecognized value type for g:vim_web_hatch_maps['"
         \ .. a:maps_key .."']: " .. l:val_type
@@ -59,7 +59,7 @@ function! s:CreateModeMaps(maps_key, solo_var, default_seq, n_cmd, i_cmd, v_cmd)
       return
     endif
   else
-    let l:all_keys = s:listify(get(g:, a:solo_var, a:default_seq), "g:" .. a:solo_var)
+    let l:all_keys = s:Listify(get(g:, a:solo_var, a:default_seq), "g:" .. a:solo_var)
 
     let l:n_keys = all_keys
     let l:i_keys = all_keys
@@ -85,7 +85,7 @@ endfunction
 
 " ***
 
-function! s:listify(string_or_list, var_name) abort
+function! s:Listify(string_or_list, var_name) abort
   let l:val_type = type(a:string_or_list)
 
   if l:val_type == v:t_string
