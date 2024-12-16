@@ -5,21 +5,6 @@
 
 " -------------------------------------------------------------------
 
-" USAGE: After editing this plugin, you can reload it on the fly with
-"        https://github.com/landonb/vim-source-reloader#↩️
-" - Uncomment this `unlet` (or disable the `finish`) and hit <F9>.
-"
-" silent! unlet g:loaded_vim_web_hatch_autoload_browser
-
-if exists("g:loaded_vim_web_hatch_autoload_browser") || &cp
-
-  finish
-endif
-
-let g:loaded_vim_web_hatch_autoload_browser = 1
-
-" -------------------------------------------------------------------
-
 " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 " Open selected URL — Utility functions
 " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
