@@ -66,14 +66,14 @@ function! s:CreateModeMaps(maps_key, solo_var, default_seq, n_cmd, i_cmd, v_cmd)
     let l:v_keys = all_keys
   endif
 
-  call s:remap_maps("n", l:n_keys, a:n_cmd)
-  call s:remap_maps("i", l:i_keys, a:i_cmd)
-  call s:remap_maps("v", l:v_keys, a:v_cmd)
+  call s:RemapMaps("n", l:n_keys, a:n_cmd)
+  call s:RemapMaps("i", l:i_keys, a:i_cmd)
+  call s:RemapMaps("v", l:v_keys, a:v_cmd)
 endfunction
 
 " ***
 
-function! s:remap_maps(map_mode, map_keys, map_cmd) abort
+function! s:RemapMaps(map_mode, map_keys, map_cmd) abort
   for l:seq in a:map_keys
     if maparg(l:seq, a:map_mode) == ""
       exe a:map_mode .. "noremap <silent> " .. l:seq .. " " .. a:map_cmd
