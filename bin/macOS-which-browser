@@ -1,7 +1,7 @@
 #!/bin/sh
 # vim:tw=0:ts=2:sw=2:et:norl:ft=bash
 # Author: Landon Bouma <https://tallybark.com/>
-# Project: https://github.com/embrace-vim/vim-web-hatch#🐣
+# Project: https://github.com/embrace-vim/vim-webopen#🐣
 # License: GPLv3
 
 # 2021-01-28: SNYC_ME: See related functionality (POSIX script):
@@ -27,7 +27,7 @@ macOS_which_browser () {
   fi
 
   # Copy the Property List to a temporary location, before transforming it.
-  local tempfile="$(mktemp -t vim-web-hatch--com.apple.launchservices.secure.plist--XXXXX)"
+  local tempfile="$(mktemp -t vim-webopen--com.apple.launchservices.secure.plist--XXXXX)"
 
   command cp -f -- "${proplist}" "${tempfile}"
 

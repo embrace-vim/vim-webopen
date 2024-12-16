@@ -1,6 +1,6 @@
 " vim:tw=0:ts=2:sw=2:et:norl
 " Author: Landon Bouma <https://tallybark.com/>
-" Project: https://github.com/embrace-vim/vim-web-hatch#🐣
+" Project: https://github.com/embrace-vim/vim-webopen#🐣
 " License: GPLv3
 
 " -------------------------------------------------------------------

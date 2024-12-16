@@ -1,20 +1,20 @@
-*vim_web_hatch.txt*	`gf`-like URL openers.	2024 Dec 09
+*vim_webopen.txt*	`gf`-like URL openers.	2024 Dec 09
 
-VIM WEB HATCH 🐣 Add normal, insert, and visual mode URL openers~
+VIM WEBOPEN 🐣 Add normal, insert, and visual mode URL openers~
 
-VIM WEB HATCH					*vim-web-hatch*
+VIM WEBOPEN					*vim-webopen*
 
-1. About This Plugin				|vim-web-hatch-about|
-2. Plugin Initialization			|vim-web-hatch-initialize|
-3. Vim Web Hatch Commands			|vim-web-hatch-commands|
-4. Command Configuration			|vim-web-hatch-configuration|
-5. Browser Configuration			|vim-web-hatch-browser|
-6. Related projects				|vim-web-hatch-related|
+1. About This Plugin				|vim-webopen-about|
+2. Plugin Initialization			|vim-webopen-initialize|
+3. Plugins Commands				|vim-webopen-commands|
+4. Command Configuration			|vim-webopen-configuration|
+5. Browser Configuration			|vim-webopen-browser|
+6. Related projects				|vim-webopen-related|
 
 ==============================================================================
-1. About This Plugin				*vim-web-hatch-about*
+1. About This Plugin				*vim-webopen-about*
 
-About Vim Web Hatch~
+About Vim Webopen~
 
 Simple URL opener with search and word definition options.
 
@@ -24,9 +24,9 @@ It can also Google search or define a selected word, or open
 a URL in an incognito (private) window.
 
 ==============================================================================
-2. Plugin Initialization			*vim-web-hatch-initialize*
+2. Plugin Initialization			*vim-webopen-initialize*
 
-Initial Vim Web Hatch~
+Initial Vim Webopen~
 
 Your Vim config must initialize the plugin, otherwise it won't do anything.
 
@@ -34,17 +34,17 @@ Call this from your Vim config: >
 
     call embrace#vim_web_hatch#create_maps()
 <
-See |vim-web-hatch-configuration| below for details on how to choose
+See |vim-webopen-configuration| below for details on how to choose
 what commands to enable, and what key sequences to use to map them.
 
 ==============================================================================
-3. Vim Web Hatch Commands			*vim-web-hatch-commands*
+3. Plugins Commands				*vim-webopen-commands*
 
-Vim Web Hatch Commands~
+Vim Webopen Commands~
 
-Without any configuration, `vim-web-hatch` will configure the following
+Without any configuration, `vim-webopen` will configure the following
 maps in each of three separate modes — normal mode, insert mode, and visual
-mode. `vim-web-hatch` will not redefine an existing command. See the next
+mode. `vim-webopen` will not redefine an existing command. See the next
 section for customizing or disabling each command map.
 
 							*<Leader>T*
@@ -79,7 +79,7 @@ section for customizing or disabling each command map.
 			(Mnemonic: Private window)
 
 ==============================================================================
-4. Command Configuration			*vim-web-hatch-configuration*
+4. Command Configuration			*vim-webopen-configuration*
 
 Custom Command Maps~
 
@@ -137,7 +137,7 @@ Option 2: Define a single global variable Dictionary.
   variable if the top-level key is missing.
 
   - And if the Option 1 variable isn't set, it'll use the
-    default key sequence shown above (in |vim-web-hatch-commands|).
+    default key sequence shown above (in |vim-webopen-commands|).
 
   - So this plugin is opt-out, not opt-in; but it no case will it
     clobber an existing map.
@@ -191,10 +191,10 @@ can build the dictionary one key-value at a time.
     call embrace#vim_web_hatch#create_maps()
 <
 - You can see a real-world implementation in:
-  https://github.com/DepoXy/depoxy/blob/release/home/.vim/pack/DepoXy/start/vim-depoxy/plugin/vim-web-hatch-config.vim
+  https://github.com/DepoXy/depoxy/blob/1.7.5/home/.vim/pack/DepoXy/start/vim-depoxy/plugin/vim-webopen-config.vim
 
 ==============================================================================
-5. Browser Configuration			*vim-web-hatch-browser*
+5. Browser Configuration			*vim-webopen-browser*
 
 Default Browser~
 
@@ -259,10 +259,10 @@ respect tab vs. window, nor can it open a location in incognito mode.
 Please feel free to open a pull request to add support for additional browsers.
 
 ==============================================================================
-6. Related projects				*vim-web-hatch-related*
+6. Related projects				*vim-webopen-related*
 
 The author never checked to see if there was an existing plugin similar
-to `vim-web-hatch`, but please feel free to let me know, and I'll add it
+to `vim-webopen`, but please feel free to let me know, and I'll add it
 here.
 
  vim:tw=78:ts=8:ft=help:norl:noet:

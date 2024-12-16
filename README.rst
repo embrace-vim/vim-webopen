@@ -26,9 +26,9 @@ commands to enable, and how to specify which key sequences to use.
 Default Commands
 ================
 
-Without any configuration, ``vim-web-hatch`` will configure the following
+Without any configuration, ``vim-webopen`` will configure the following
 maps in each of three separate modes — normal mode, insert mode, and visual
-mode. ``vim-web-hatch`` will not redefine an existing command. See the next
+mode. ``vim-webopen`` will not redefine an existing command. See the next
 section for customizing or disabling each command map.
 
 
@@ -187,11 +187,11 @@ can build the dictionary one key-value at a time.
 
     call embrace#vim_web_hatch#create_maps()
 
-.. |vim-web-hatch-config| replace:: ``https://github.com/DepoXy/depoxy/blob/1.7.0/home/.vim/pack/DepoXy/start/vim-depoxy/plugin/vim-web-hatch-config.vim``
-.. _vim-web-hatch-config: https://github.com/DepoXy/depoxy/blob/1.7.0/home/.vim/pack/DepoXy/start/vim-depoxy/plugin/vim-web-hatch-config.vim
+.. |vim-webopen-config| replace:: ``https://github.com/DepoXy/depoxy/blob/1.7.5/home/.vim/pack/DepoXy/start/vim-depoxy/plugin/vim-webopen-config.vim``
+.. _vim-webopen-config: https://github.com/DepoXy/depoxy/blob/1.7.5/home/.vim/pack/DepoXy/start/vim-depoxy/plugin/vim-webopen-config.vim
 
 (You can see a real-world implementation in
-|vim-web-hatch-config|_.)
+|vim-webopen-config|_.)
 
 Browser Configure
 =================
@@ -287,13 +287,13 @@ Clone the project to the desired path:
 
 .. code-block::
 
-    git clone https://github.com/embrace-vim/vim-web-hatch.git
+    git clone https://github.com/embrace-vim/vim-webopen.git
 
 If you installed to the optional path, tell Vim to load the package:
 
 .. code-block:: vim
 
-    :packadd! vim-web-hatch
+    :packadd! vim-webopen
 
 Just once, tell Vim to build the online help:
 
@@ -305,7 +305,7 @@ Then whenever you want to reference the help from Vim, run:
 
 .. code-block:: vim
 
-    :help vim-web-hatch
+    :help vim-webopen
 
 .. |vim-plug| replace:: ``vim-plug``
 .. _vim-plug: https://github.com/junegunn/vim-plug
@@ -333,7 +333,7 @@ occasionally).
     call plug#begin()
 
     " List your plugins here
-    Plug 'embrace-vim/vim-web-hatch'
+    Plug 'embrace-vim/vim-webopen'
 
     call plug#end()
 
@@ -361,7 +361,7 @@ occasionally).
     " let Vundle manage Vundle, required
     Plugin 'VundleVim/Vundle.vim'
 
-    Plugin 'embrace-vim/vim-web-hatch'
+    Plugin 'embrace-vim/vim-webopen'
 
     " All of your Plugins must be added before the following line
     call vundle#end()            " required
@@ -401,8 +401,8 @@ occasionally).
     [DEFAULT]
     skip = mr_exclusive "vim-plugins"
 
-    [pack/embrace-vim/start/vim-web-hatch]
-    lib = remote_set origin https://github.com/embrace-vim/vim-web-hatch.git
+    [pack/embrace-vim/start/vim-webopen]
+    lib = remote_set origin https://github.com/embrace-vim/vim-webopen.git
 
     [DEFAULT]
     skip = false
