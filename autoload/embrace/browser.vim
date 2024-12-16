@@ -258,7 +258,7 @@ function! embrace#browser#web_open_url(suggested_uri, incognito)
     return
   endif
 
-  call s:open_browser_window(l:uri, a:incognito)
+  call s:OpenBrowserWindow(l:uri, a:incognito)
 endfunction
 
 " ***
@@ -293,7 +293,7 @@ endfunction
 
 " ***
 
-function! s:open_browser_window(uri, incognito)
+function! s:OpenBrowserWindow(uri, incognito)
   let l:which_browser = s:DefaultBrowser()
 
   " echom 'Open URL: ' . l:uri
