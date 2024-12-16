@@ -26,7 +26,7 @@ let g:loaded_vim_web_hatch_autoload_multimap = 1
 
 function! embrace#multimap#create_maps(maps_key, solo_var, default_seq, n_cmd, i_cmd, v_cmd) abort
   try
-    call s:create_mode_maps(a:maps_key, a:solo_var, a:default_seq, a:n_cmd, a:i_cmd, a:v_cmd)
+    call s:CreateModeMaps(a:maps_key, a:solo_var, a:default_seq, a:n_cmd, a:i_cmd, a:v_cmd)
   catch
     echom "ALERT: vim-web-hatch: Failed to wire mode maps for '" .. a:maps_key .. "' command"
     echom "v:exception: " .. v:exception
@@ -35,7 +35,7 @@ endfunction
 
 " ***
 
-function! s:create_mode_maps(maps_key, solo_var, default_seq, n_cmd, i_cmd, v_cmd) abort
+function! s:CreateModeMaps(maps_key, solo_var, default_seq, n_cmd, i_cmd, v_cmd) abort
   let l:maps_var = "g:vim_web_hatch_maps['" .. a:maps_key .."']"
 
   if exists("g:vim_web_hatch_maps") && exists(l:maps_var)
