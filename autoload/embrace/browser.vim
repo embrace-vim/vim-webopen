@@ -172,7 +172,7 @@ endfunction
 "       open -n --args --new-window <location>
 "     will not work as intended.
 "     - Note also order matters: Put <location> last.
-function! s:browser_cmd(which_browser, options)
+function! s:FormatBrowserCommand(which_browser, options)
   let l:browpener = ""
 
   if has('macunix')
@@ -311,7 +311,7 @@ function! s:OpenBrowserWindow(uri, incognito)
   " Tell Chrome to use default user profile, unless g:vim_webopen_mru_profile.
   let l:options = s:GetOptionsProfileDir(l:which_browser, l:options)
 
-  let l:browpener = <SID>browser_cmd(l:which_browser, options)
+  let l:browpener = s:FormatBrowserCommand(l:which_browser, options)
 
   " echom 'silent exec ' . '!' . l:browpener . ' ' . l:options . l:uri
 
