@@ -34,7 +34,7 @@
 "        ~/.vim/pack/landonb/start/vim-netrw-link-resolve/net.
 let s:vim_web_hatch_plugin_path = fnamemodify(resolve(expand('<sfile>:p')), ':h')
 
-function! s:macOS_which_browser()
+function! s:SussHandlerMacOS()
   " 2020-09-01: (lb): Not worrying about path separator.
   "             (Vim handles, right? That, or '/' works on Windows.)
   " REFER: fnamemodify(..., ':h'): See: :h filename-modifiers
@@ -61,7 +61,7 @@ endfunction
 
 function! s:default_browser()
   if has('macunix')
-    let l:handler = <SID>macOS_which_browser()
+    let l:handler = s:SussHandlerMacOS()
 
     if l:handler == "com.google.chrome"
 
