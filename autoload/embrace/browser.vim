@@ -27,9 +27,9 @@ let g:loaded_vim_web_hatch_autoload_browser = 1
 " INERT/2020-05-10: Add g:global_variable for choosing URL opener,
 " possibly with distro-specific fallback, e.g.,
 "
-"   if !exists("g:vim_web_hatch_open")
+"   if !exists("g:vim_webopen_open")
 "     if (match(system('cat /proc/version'), 'Ubuntu') >= 0)
-"       let g:vim_web_hatch_open = 'sensible-browser'
+"       let g:vim_webopen_open = 'sensible-browser'
 "     ...
 "
 " - Except code calls `sensible-browser --version`, which wouldn't
@@ -147,7 +147,7 @@ endfunction
 function! s:browopts_new_window(which_browser, options)
   let l:options = a:options
 
-  if !exists("g:vim_web_hatch_use_tab") || g:vim_web_hatch_use_tab == 0
+  if !exists("g:vim_webopen_use_tab") || g:vim_webopen_use_tab == 0
     if a:which_browser == 'chrome' || a:which_browser == 'firefox'
       let l:options = l:options . "--new-window "
     endif
@@ -161,7 +161,7 @@ endfunction
 function! s:browopts_profile_dir(which_browser, options)
   let l:options = a:options
 
-  if !exists("g:vim_web_hatch_mru_profile") || g:vim_web_hatch_mru_profile == 0
+  if !exists("g:vim_webopen_mru_profile") || g:vim_webopen_mru_profile == 0
     if a:which_browser == 'chrome'
       let l:options = l:options . "--profile-directory=Default "
     endif
@@ -321,9 +321,9 @@ function! s:open_browser_window(uri, incognito)
   let l:options = ""
   " Add private browsing flag, perhaps, depending on which command was called.
   let l:options = <SID>browopts_incognito(l:which_browser, l:options, a:incognito)
-  " Add new window flag, usually, unless disabled via g:vim_web_hatch_use_tab.
+  " Add new window flag, usually, unless disabled via g:vim_webopen_use_tab.
   let l:options = <SID>browopts_new_window(l:which_browser, l:options)
-  " Tell Chrome to use default user profile, unless g:vim_web_hatch_mru_profile.
+  " Tell Chrome to use default user profile, unless g:vim_webopen_mru_profile.
   let l:options = <SID>browopts_profile_dir(l:which_browser, l:options)
 
   let l:browpener = <SID>browser_cmd(l:which_browser, options)

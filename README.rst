@@ -82,10 +82,10 @@ For example, the default commands (listed above) are configured like this:
 
 .. code-block::
 
-    let g:vim_web_hatch_open_url_seq = "<Leader>T"
-    let g:vim_web_hatch_google_define_seq = "<Leader>D"
-    let g:vim_web_hatch_google_search_seq = "<Leader>W"
-    let g:vim_web_hatch_open_incognito_seq = "<Leader>P"
+    let g:vim_webopen_open_location_seq = "<Leader>T"
+    let g:vim_webopen_google_define_seq = "<Leader>D"
+    let g:vim_webopen_google_search_seq = "<Leader>W"
+    let g:vim_webopen_open_incognito_seq = "<Leader>P"
 
     call g:embrace#webopen#CreateMaps()
 
@@ -104,7 +104,7 @@ Option 2: Define a single global variable Dictionary.
 
 .. code-block::
 
-    let g:vim_web_hatch_maps = { "open": { "nmap": [ "<Leader>T", "gW" ] } }
+    let g:vim_webopen_maps = { "open": { "nmap": [ "<Leader>T", "gW" ] } }
 
 - To inhibit maps for a specific feature, set the top-level
   value to an empty dictionary, e.g., to skip the incognito
@@ -112,7 +112,7 @@ Option 2: Define a single global variable Dictionary.
 
 .. code-block::
 
-    let g:vim_web_hatch_maps = { "incognito": {} }
+    let g:vim_webopen_maps = { "incognito": {} }
 
 - Or, to inhibit maps for a specific mode, set the nested dictionary
   value to an empty string or to an empty list.
@@ -122,10 +122,10 @@ Option 2: Define a single global variable Dictionary.
 
 .. code-block::
 
-    let g:vim_web_hatch_maps =
+    let g:vim_webopen_maps =
       \ { "open": { "nmap": "", "imap": [], "vmap": "<Leader>T" } }
 
-- Note the plugin uses ``g:vim_web_hatch_maps`` if a top-level key
+- Note the plugin uses ``g:vim_webopen_maps`` if a top-level key
   is found (like "open"). But it will look for the Option 1
   variable if the top-level key is missing.
 
@@ -142,7 +142,7 @@ visual mode:
 
 .. code-block::
 
-    let g:vim_web_hatch_maps =
+    let g:vim_webopen_maps =
       \ {
       \   "open":
       \     {
@@ -164,26 +164,26 @@ can build the dictionary one key-value at a time.
 
 .. code-block::
 
-    let g:vim_web_hatch_maps = {}
+    let g:vim_webopen_maps = {}
 
-    let g:vim_web_hatch_maps.open = {}
-    let g:vim_web_hatch_maps.define = {}
-    let g:vim_web_hatch_maps.search = {}
-    let g:vim_web_hatch_maps.incognito = {}
+    let g:vim_webopen_maps.open = {}
+    let g:vim_webopen_maps.define = {}
+    let g:vim_webopen_maps.search = {}
+    let g:vim_webopen_maps.incognito = {}
 
-    let g:vim_web_hatch_maps.open.nmap = [ "<Leader>T", "gW" ]
-    let g:vim_web_hatch_maps.open.imap = "<Leader>T"
-    let g:vim_web_hatch_maps.open.vmap = "<Leader>T"
+    let g:vim_webopen_maps.open.nmap = [ "<Leader>T", "gW" ]
+    let g:vim_webopen_maps.open.imap = "<Leader>T"
+    let g:vim_webopen_maps.open.vmap = "<Leader>T"
 
-    let g:vim_web_hatch_maps.define.nmap = "<Leader>D"
-    let g:vim_web_hatch_maps.define.imap = "<Leader>D"
-    let g:vim_web_hatch_maps.define.vmap = "<Leader>D"
+    let g:vim_webopen_maps.define.nmap = "<Leader>D"
+    let g:vim_webopen_maps.define.imap = "<Leader>D"
+    let g:vim_webopen_maps.define.vmap = "<Leader>D"
 
-    let g:vim_web_hatch_maps.search.nmap = "<Leader>W"
-    let g:vim_web_hatch_maps.search.imap = "<Leader>W"
-    let g:vim_web_hatch_maps.search.vmap = "<Leader>W"
+    let g:vim_webopen_maps.search.nmap = "<Leader>W"
+    let g:vim_webopen_maps.search.imap = "<Leader>W"
+    let g:vim_webopen_maps.search.vmap = "<Leader>W"
 
-    let g:vim_web_hatch_maps.incognito.nmap = "g!"
+    let g:vim_webopen_maps.incognito.nmap = "g!"
 
     call g:embrace#webopen#CreateMaps()
 
@@ -236,7 +236,7 @@ By default, each command opens a new browser tab in new window.
 - To instead prefer opening a new tab in an existing window,
   set the following global variable to nonzero, e.g.,::
 
-    g:vim_web_hatch_use_tab = 1
+    g:vim_webopen_use_tab = 1
 
 User Profile
 ------------
@@ -246,7 +246,7 @@ By default, when Chrome is opened, the default user profile is used.
 - To instead open a window using the most recently used profile,
   set the following global variable to nonzero, e.g.,::
 
-    g:vim_web_hatch_mru_profile = 1
+    g:vim_webopen_mru_profile = 1
 
 Supported Browsers
 ------------------

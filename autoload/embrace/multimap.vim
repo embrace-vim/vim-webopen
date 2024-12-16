@@ -36,10 +36,10 @@ endfunction
 " ***
 
 function! s:CreateModeMaps(maps_key, solo_var, default_seq, n_cmd, i_cmd, v_cmd) abort
-  let l:maps_var = "g:vim_web_hatch_maps['" .. a:maps_key .."']"
+  let l:maps_var = "g:vim_webopen_maps['" .. a:maps_key .."']"
 
-  if exists("g:vim_web_hatch_maps") && exists(l:maps_var)
-    let l:feature_val = g:vim_web_hatch_maps[a:maps_key]
+  if exists("g:vim_webopen_maps") && exists(l:maps_var)
+    let l:feature_val = g:vim_webopen_maps[a:maps_key]
     let l:val_type = type(l:feature_val)
 
     if l:val_type == v:t_string || l:val_type == v:t_list
@@ -53,7 +53,7 @@ function! s:CreateModeMaps(maps_key, solo_var, default_seq, n_cmd, i_cmd, v_cmd)
       let l:i_keys = s:Listify(get(l:feature_val, "imap", []), l:maps_var)
       let l:v_keys = s:Listify(get(l:feature_val, "vmap", []), l:maps_var)
     else
-      echom "ALERT: vim-webopen: Unrecognized value type for g:vim_web_hatch_maps['"
+      echom "ALERT: vim-webopen: Unrecognized value type for g:vim_webopen_maps['"
         \ .. a:maps_key .."']: " .. l:val_type
 
       return
