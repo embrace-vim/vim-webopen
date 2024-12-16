@@ -124,7 +124,7 @@ endfunction
 "
 "     <Leader>D
 
-function! s:place_binding_search_web_for_definition()
+function! s:CreateMaps_WebOpenDefine()
   " [lb]: Almost same as s:place_binding_search_web_for_selection, above,
   " but with `define+` added.
   let l:n_cmd = ":call embrace#browser#WebOpenUrl('https://www.google.com/search?q=define+<C-R><C-W>', 0)<CR>"
@@ -332,7 +332,7 @@ function! g:embrace#webopen#CreateMaps() abort
   "     let g:vim_webopen_maps.define.nmap = "<Leader>D"
   "     let g:vim_webopen_maps.define.imap = "<Leader>D"
   "     let g:vim_webopen_maps.define.vmap = "<Leader>D"
-  call <SID>place_binding_search_web_for_definition()
+  call s:CreateMaps_WebOpenDefine()
 
   " Run Google search on term under cursor/selected.
   " - USAGE: E.g. (mnemonic: "search _W_eb"):
