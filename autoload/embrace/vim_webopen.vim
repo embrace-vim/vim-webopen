@@ -51,7 +51,7 @@
 "
 "     <Leader>W
 
-function! s:place_binding_search_web_for_selection()
+function! s:CreateMaps_WebOpenSearch()
   " Note that Chrome opens the URL as-is, i.e., it's not like the location
   " bar where Chrome will search Google instead if the location is missing
   " a 'scheme://'. So specify the complete URL.
@@ -125,7 +125,7 @@ endfunction
 "     <Leader>D
 
 function! s:CreateMaps_WebOpenDefine()
-  " [lb]: Almost same as s:place_binding_search_web_for_selection, above,
+  " [lb]: Almost same as s:CreateMaps_WebOpenSearch, above,
   " but with `define+` added.
   let l:n_cmd = ":call embrace#browser#WebOpenUrl('https://www.google.com/search?q=define+<C-R><C-W>', 0)<CR>"
   let l:i_cmd = "<C-O>" .. n_cmd
@@ -342,7 +342,7 @@ function! g:embrace#webopen#CreateMaps() abort
   "     let g:vim_webopen_maps.search.nmap = "<Leader>W"
   "     let g:vim_webopen_maps.search.imap = "<Leader>W"
   "     let g:vim_webopen_maps.search.vmap = "<Leader>W"
-  call <SID>place_binding_search_web_for_selection()
+  call s:CreateMaps_WebOpenSearch()
 
   " Open URL under cursor/selected in incognito window.
   " - USAGE: E.g. (mnemonic: "open _P_rivate window"):
