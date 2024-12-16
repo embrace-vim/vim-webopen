@@ -82,7 +82,7 @@ function! s:place_binding_search_web_for_selection()
     \ ":<C-U>call embrace#browser#web_open_url('https://www.google.com/search?q=<C-R>\"', 0)<CR>"
 
   " Traditional default: \W opens browser to Google search of selected text.
-  call embrace#multimap#create_maps(
+  call embrace#multimap#CreateMaps(
     \ "search",
     \ "vim_web_hatch_google_search_seq",
     \ "<Leader>W",
@@ -154,7 +154,7 @@ function! s:place_binding_search_web_for_definition()
     \ ":<C-U>call embrace#browser#web_open_url('https://www.google.com/search?q=define+<C-R>\"', 0)<CR>"
 
   " Traditional default: \D opens browser to Google define of selected text.
-  call embrace#multimap#create_maps(
+  call embrace#multimap#CreateMaps(
     \ "define",
     \ "vim_web_hatch_google_define_seq",
     \ "<Leader>D",
@@ -235,7 +235,7 @@ function! s:place_binding_web_open_url()
   let l:v_cmd = "y:call embrace#browser#web_open_url('<C-r>\"', 0)<CR>"
 
   " Traditional default: <Leader>T opens URL under cursor/selected.
-  call embrace#multimap#create_maps(
+  call embrace#multimap#CreateMaps(
     \ "open",
     \ "vim_web_hatch_open_url_seq",
     \ "<Leader>T",
@@ -306,7 +306,7 @@ function! s:place_binding_web_open_url_incognito()
   let l:v_cmd = "y:call embrace#browser#web_open_url('<C-r>\"', 1)<CR>"
 
   " Defaults <Leader>P to open URL under cursor/selected in private window.
-  call embrace#multimap#create_maps(
+  call embrace#multimap#CreateMaps(
     \ "incognito",
     \ "vim_web_hatch_open_incognito_seq",
     \ "<Leader>P",
@@ -321,7 +321,7 @@ endfunction
 " Public setup function — Call from your user code to setup this plugin
 " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-function! embrace#vim_web_hatch#create_maps() abort
+function! g:embrace#webopen#CreateMaps() abort
   " The following USAGE examples assume config dictionary setup thusly:
   "   let g:vim_web_hatch_maps = {}
   "   let g:vim_web_hatch_maps.open = {}
@@ -373,5 +373,5 @@ endfunction
 " USAGE: Set g:vim_web_hatch_* variable(s) to your liking, then
 " call setup function to wire 'em all:
 "
-"   call embrace#vim_web_hatch#create_maps()
+"   call g:embrace#webopen#CreateMaps()
 

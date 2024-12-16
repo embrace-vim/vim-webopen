@@ -32,7 +32,7 @@ Your Vim config must initialize the plugin, otherwise it won't do anything.
 
 Call this from your Vim config: >
 
-    call embrace#vim_web_hatch#create_maps()
+    call g:embrace#webopen#CreateMaps()
 <
 See |vim-webopen-configuration| below for details on how to choose
 what commands to enable, and what key sequences to use to map them.
@@ -101,7 +101,7 @@ For example, the default commands (listed above) are configured like this: >
     let g:vim_web_hatch_google_search_seq = "<Leader>W"
     let g:vim_web_hatch_open_incognito_seq = "<Leader>P"
 
-    call embrace#vim_web_hatch#create_maps()
+    call g:embrace#webopen#CreateMaps()
 <
 OPTION 2
 
@@ -159,7 +159,7 @@ visual mode: >
       \   "search": "<Leader>W",
       \   "incognito": { "nmap": "g!" },
 
-    call embrace#vim_web_hatch#create_maps()
+    call g:embrace#webopen#CreateMaps()
 <
 Tip: If you'd like to avoid a long dictionary definition, you
 can build the dictionary one key-value at a time.
@@ -188,7 +188,7 @@ can build the dictionary one key-value at a time.
 
     let g:vim_web_hatch_maps.incognito.nmap = "g!"
 
-    call embrace#vim_web_hatch#create_maps()
+    call g:embrace#webopen#CreateMaps()
 <
 - You can see a real-world implementation in:
   https://github.com/DepoXy/depoxy/blob/1.7.5/home/.vim/pack/DepoXy/start/vim-depoxy/plugin/vim-webopen-config.vim

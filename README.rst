@@ -18,7 +18,7 @@ Call this from your Vim config:
 
 .. code-block::
 
-    call embrace#vim_web_hatch#create_maps()
+    call g:embrace#webopen#CreateMaps()
 
 See `Command Configuration`_ below for details on how to choose which
 commands to enable, and how to specify which key sequences to use.
@@ -87,7 +87,7 @@ For example, the default commands (listed above) are configured like this:
     let g:vim_web_hatch_google_search_seq = "<Leader>W"
     let g:vim_web_hatch_open_incognito_seq = "<Leader>P"
 
-    call embrace#vim_web_hatch#create_maps()
+    call g:embrace#webopen#CreateMaps()
 
 OPTION 2
 --------
@@ -154,7 +154,7 @@ visual mode:
       \   "search": "<Leader>W",
       \   "incognito": { "nmap": "g!" },
 
-    call embrace#vim_web_hatch#create_maps()
+    call g:embrace#webopen#CreateMaps()
 
 Tip: If you'd like to avoid a long dictionary definition, you
 can build the dictionary one key-value at a time.
@@ -185,7 +185,7 @@ can build the dictionary one key-value at a time.
 
     let g:vim_web_hatch_maps.incognito.nmap = "g!"
 
-    call embrace#vim_web_hatch#create_maps()
+    call g:embrace#webopen#CreateMaps()
 
 .. |vim-webopen-config| replace:: ``https://github.com/DepoXy/depoxy/blob/1.7.5/home/.vim/pack/DepoXy/start/vim-depoxy/plugin/vim-webopen-config.vim``
 .. _vim-webopen-config: https://github.com/DepoXy/depoxy/blob/1.7.5/home/.vim/pack/DepoXy/start/vim-depoxy/plugin/vim-webopen-config.vim
