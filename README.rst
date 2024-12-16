@@ -1,12 +1,10 @@
-################################################
-URL Opener Commands for Vim 🐣 ``vim-web-hatch``
-################################################
+################################
+Open URLs in external browser 🐣
+################################
 
-.. |em_dash| unicode:: 0x2014 .. em dash
+Simple URL opener for Vim with search and word definition options.
 
-Simple URL opener with search and word definition options.
-
-At its core, opens a location in your default browser.
+Defines command maps to open a location in your default browser.
 
 It can also Google search or define a selected word, or open
 a URL in an incognito (private) window.
@@ -22,8 +20,8 @@ Call this from your Vim config:
 
     call embrace#vim_web_hatch#create_maps()
 
-See `Command Configuration`_ below for details on how to choose
-what commands to enable, and what key sequences to use to map them.
+See `Command Configuration`_ below for details on how to choose which
+commands to enable, and how to specify which key sequences to use.
 
 Default Commands
 ================
