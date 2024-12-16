@@ -214,7 +214,7 @@ endfunction
 "     vnoremap <silent> <Leader>T y:call embrace#browser#WebOpenUrl('<C-r>"', 0)<CR>
 "   endif
 
-function! s:place_binding_web_open_url()
+function! s:CreateMaps_WebOpenUrl()
   let l:n_cmd = ":call embrace#browser#WebOpenUrl('', 0)<CR>"
   let l:i_cmd = "<C-O>" .. n_cmd
   let l:v_cmd = "y:call embrace#browser#WebOpenUrl('<C-r>\"', 0)<CR>"
@@ -322,7 +322,7 @@ function! g:embrace#webopen#CreateMaps() abort
   "     let g:vim_webopen_maps.open.nmap = "<Leader>T"
   "     let g:vim_webopen_maps.open.imap = "<Leader>T"
   "     let g:vim_webopen_maps.open.vmap = "<Leader>T"
-  call <SID>place_binding_web_open_url()
+  call s:CreateMaps_WebOpenUrl()
 
   " Run Google define on term under cursor/selected.
   " - USAGE: E.g. (mnemonic: "_D_efine"):
