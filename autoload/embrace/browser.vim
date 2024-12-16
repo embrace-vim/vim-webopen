@@ -32,14 +32,14 @@
 " - (lb) Running at script/source level, because if I <F9> reload this script,
 "        I see different (incorrect) path (of another plugin,
 "        ~/.vim/pack/landonb/start/vim-netrw-link-resolve/net.
-let s:vim_web_hatch_plugin_path = fnamemodify(resolve(expand('<sfile>:p')), ':h')
+let s:vim_webopen_plugin_path = fnamemodify(resolve(expand('<sfile>:p')), ':h')
 
 function! s:SussHandlerMacOS()
   " 2020-09-01: (lb): Not worrying about path separator.
   "             (Vim handles, right? That, or '/' works on Windows.)
   " REFER: fnamemodify(..., ':h'): See: :h filename-modifiers
   "        - ':h:h' removes 'autoload/embrace/' to get project root.
-  let l:plugbin = fnamemodify(s:vim_web_hatch_plugin_path, ':h:h') . '/' . 'bin'
+  let l:plugbin = fnamemodify(s:vim_webopen_plugin_path, ':h:h') . '/' . 'bin'
   "  echom l:plugbin
   let l:whicher = l:plugbin . '/' . 'macOS-which-browser'
   " REFER: See :h feature-list / Note that Cygwin is 'win32unix'.
