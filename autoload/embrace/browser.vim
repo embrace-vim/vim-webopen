@@ -59,7 +59,7 @@ endfunction
 
 " ***
 
-function! s:default_browser()
+function! s:DefaultBrowser()
   if has('macunix')
     let l:handler = s:SussHandlerMacOS()
 
@@ -294,7 +294,7 @@ endfunction
 " ***
 
 function! s:open_browser_window(uri, incognito)
-  let l:which_browser = <SID>default_browser()
+  let l:which_browser = s:DefaultBrowser()
 
   " echom 'Open URL: ' . l:uri
   "   \ . ' / incognito: ' . a:incognito
