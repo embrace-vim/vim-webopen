@@ -250,7 +250,7 @@ endfunction
 "       spotify:track:6JEK0CvvjDjjMUBFoXShNZ
 "   which is novel, but not a feature that I see myself starting to use.
 function! embrace#browser#WebOpenUrl(suggested_uri, incognito)
-  let l:uri = s:use_suggested_uri_or_parse_line(a:suggested_uri)
+  let l:uri = s:UseSuggestedUriOrParseLine(a:suggested_uri)
 
   if l:uri == ""
     echom "No URI found in line."
@@ -263,7 +263,7 @@ endfunction
 
 " ***
 
-function! s:use_suggested_uri_or_parse_line(uri)
+function! s:UseSuggestedUriOrParseLine(uri)
   if a:uri != ""
 
     return a:uri
