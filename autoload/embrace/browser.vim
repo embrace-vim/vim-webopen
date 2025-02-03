@@ -30,8 +30,8 @@
 " https://stackoverflow.com/questions/4976776/how-to-get-path-to-the-current-vimscript-being-executed
 " Path to this script's directory: get absolute path; resolve symlinks; get directory name.
 " - (lb) Running at script/source level, because if I <F9> reload this script,
-"        I see different (incorrect) path (of another plugin,
-"        ~/.vim/pack/landonb/start/vim-netrw-link-resolve/net.
+"        I see different (incorrect) path (of another plugin) if I run this
+"        resolve from within a function.
 let s:vim_webopen_plugin_path = fnamemodify(resolve(expand('<sfile>:p')), ':h')
 
 function! s:SussHandlerMacOS()
