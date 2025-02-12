@@ -1,6 +1,6 @@
 *vim_webopen.txt*	`gf`-like URL openers.	2024 Dec 09
 
-VIM WEBOPEN 🐣 Open URLs in external browser~
+VIM WEBOPEN 🐣 Open URLs in external browser ~
 
 VIM WEBOPEN					*vim-webopen*
 
@@ -14,7 +14,7 @@ VIM WEBOPEN					*vim-webopen*
 ==============================================================================
 1. About This Plugin				*vim-webopen-about*
 
-About Vim Webopen~
+About Vim Webopen ~
 
 Open URLs from Vim. Or search the web, define words, or use an incognito
 (private) window.
@@ -25,7 +25,7 @@ commands and their key sequences.
 ==============================================================================
 2. Plugin Initialization			*vim-webopen-initialize*
 
-Initial Vim Webopen~
+Initial Vim Webopen ~
 
 Your Vim config must initialize the plugin, otherwise it won't do anything.
 
@@ -39,7 +39,7 @@ what commands to enable, and what key sequences to use to map them.
 ==============================================================================
 3. Plugins Commands				*vim-webopen-commands*
 
-Vim Webopen Commands~
+Vim Webopen Commands ~
 
 Without any configuration, `vim-webopen` will configure the following
 maps in each of three separate modes — normal mode, insert mode, and visual
@@ -80,7 +80,7 @@ section for customizing or disabling each command map.
 ==============================================================================
 4. Command Configuration			*vim-webopen-configuration*
 
-Custom Command Maps~
+Custom Command Maps ~
 
 OPTION 1
 
@@ -195,7 +195,7 @@ can build the dictionary one key-value at a time.
 ==============================================================================
 5. Browser Configuration			*vim-webopen-browser*
 
-Default Browser~
+Default Browser ~
 
 On Linux (Debian), this plugin calls `sensible-browser --version` to
 determine which browser to use.
@@ -226,7 +226,7 @@ looking for the default browser to use.
 Please feel free to open a pull request to add support for additional OSes,
 or to offer additional help.
 
-Tab or Window~
+Tab or Window ~
 
 By default, each command opens a new browser tab in a new window.
 
@@ -235,7 +235,7 @@ By default, each command opens a new browser tab in a new window.
 
     let g:vim_webopen_use_tab = 1
 <
-User Profile~
+User Profile ~
 
 By default, when Chrome is opened, the default user profile is used.
 
@@ -244,7 +244,7 @@ By default, when Chrome is opened, the default user profile is used.
 
     let g:vim_webopen_mru_profile = 1
 <
-Supported Browsers~
+Supported Browsers ~
 
 This plugin works with the following browsers:
 
