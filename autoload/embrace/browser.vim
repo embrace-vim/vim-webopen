@@ -288,7 +288,10 @@ function! s:UseSuggestedUriOrParseLine(uri)
   "   'https://tallybark.com' ──────────────── ││││─│─│────────││─│─││───┐
   "   https://www.google.com/maps/place/13%C2%B008'20.1%22S+72%C2%B018'06.1%22W/@-13.1389113,-72.3022458,239m/,, 
   "                                            ││││ │ ││       │├││─││───│─────────────────────────────────────┘
-  return matchstr(getline("."), '[a-z]*:\/\/[^ >;()\[\]]\{-}\([.,;)\]"'."'".']\?\($\|[[:space:]]\)\)\@=')
+  return matchstr(
+    \ getline("."),
+    \ '[a-z]*:\/\/[^ >;()\[\]]\{-}\([.,;)\]"'."'".']\?\($\|[[:space:]]\)\)\@='
+    \ )
 endfunction
 
 " ***
