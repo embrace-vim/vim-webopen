@@ -234,7 +234,6 @@ function! s:CreateMaps_WebOpenUrlGithub()
   let l:i_cmd = "<C-O>" .. n_cmd
   let l:v_cmd = "y:call g:embrace#browser#WebOpenUrlGithub('<C-r>\"', 0)<CR>"
 
-  " Traditional default: <Leader>T opens URL under cursor/selected.
   call g:embrace#multimap#CreateMaps(
     \ "github",
     \ "vim_webopen_open_url_github_seq",
