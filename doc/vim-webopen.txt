@@ -99,6 +99,7 @@ For example, the default commands (listed above) are configured like this: >
     let g:vim_webopen_google_define_seq = "<Leader>D"
     let g:vim_webopen_google_search_seq = "<Leader>W"
     let g:vim_webopen_open_incognito_seq = "<Leader>P"
+    let g:vim_webopen_open_url_github_seq = "<Leader>og"
 
     call g:embrace#webopen#CreateMaps()
 <

@@ -229,6 +229,21 @@ function! s:CreateMaps_WebOpenUrl()
     \ l:v_cmd)
 endfunction
 
+function! s:CreateMaps_WebOpenUrlGithub()
+  let l:n_cmd = ":call g:embrace#browser#WebOpenUrlGithub('', 0)<CR>"
+  let l:i_cmd = "<C-O>" .. n_cmd
+  let l:v_cmd = "y:call g:embrace#browser#WebOpenUrlGithub('<C-r>\"', 0)<CR>"
+
+  " Traditional default: <Leader>T opens URL under cursor/selected.
+  call g:embrace#multimap#CreateMaps(
+    \ "github",
+    \ "vim_webopen_open_url_github_seq",
+    \ "<Leader>og",
+    \ l:n_cmd,
+    \ l:i_cmd,
+    \ l:v_cmd)
+endfunction
+
 " -------------------------------------------------------------------
 
 " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -353,6 +368,8 @@ function! g:embrace#webopen#CreateMaps() abort
   "     let g:vim_webopen_maps.incognito.imap = "<Leader>P"
   "     let g:vim_webopen_maps.incognito.vmap = "<Leader>P"
   call s:CreateMaps_WebOpenIncognito()
+
+  call s:CreateMaps_WebOpenUrlGithub()
 endfunction
 
 " USAGE: Set g:vim_webopen_* variable(s) to your liking, then

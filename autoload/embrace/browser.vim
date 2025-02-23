@@ -296,6 +296,49 @@ endfunction
 
 " ***
 
+" E.g., easily open https://github.com/embrace-vim/vim-webopen#🐣
+"       or more simply "embrace-vim/vim-webopen"
+function! embrace#browser#WebOpenUrlGithub(suggested_tail, incognito)
+  let l:uri_or_tail = s:UseSuggestedUriOrParseLine(a:suggested_tail)
+
+  let l:tail = ''
+
+  if l:uri_or_tail == ''
+    " This is Very Crude! E.g., consider:
+    "   echom matchstr('foo bar "baz/bat" cat/dat', '\f\+\/\f\+')  --> baz/bat
+    "   echom matchstr('https://foo.bar/baz/bat', '\f\+\/\f\+')    --> https://...
+    let l:uri_or_tail = matchstr(getline("."), '\f\+\/\f\+')
+
+    let l:tail = substitute(l:uri_or_tail, '[a-z]*:\/\/[^\/]', '', '')
+    if l:tail != l:uri_or_tail
+      let l:tail = ''
+    endif
+  else
+    let l:tail = substitute(l:uri_or_tail, 'https://github.com/', '', '')
+    if l:tail == l:uri_or_tail
+      let l:tail = ''
+    endif
+  endif
+
+  if l:tail == ''
+    echom "No GitHub URL identified"
+
+    return
+  endif
+
+  let l:uri = 'https://github.com/' .. l:tail
+
+  if l:uri == ""
+    echom "No org/proj found in line."
+
+    return
+  endif
+
+  call s:OpenBrowserWindow(l:uri, a:incognito)
+endfunction
+
+" ***
+
 function! s:OpenBrowserWindow(uri, incognito)
   let l:which_browser = s:DefaultBrowser()
 
