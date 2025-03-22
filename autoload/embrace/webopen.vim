@@ -62,7 +62,7 @@ function! s:CreateMaps_WebOpenSearch()
   " - y yanks the selected text into the default register.
   " - <Ctrl-R>" puts the yanked text into the command line.
   let l:v_cmd =
-    \ " :<C-U>" ..
+    \ ":<C-U>" ..
     \ "<CR>gvy" ..
     \ ":<C-U>call g:embrace#browser#WebOpenUrl('https://www.google.com/search?q=<C-R>\"', 0)<CR>"
 
@@ -134,7 +134,7 @@ function! s:CreateMaps_WebOpenDefine()
   " - y yanks the selected text into the default register.
   " - <Ctrl-R>" puts the yanked text into the command line.
   let l:v_cmd =
-    \ " :<C-U>" ..
+    \ ":<C-U>" ..
     \ "<CR>gvy" ..
     \ ":<C-U>call g:embrace#browser#WebOpenUrl('https://www.google.com/search?q=define+<C-R>\"', 0)<CR>"
 
