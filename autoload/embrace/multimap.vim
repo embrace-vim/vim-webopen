@@ -9,7 +9,14 @@
 " Key sequence command map utilities
 " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-function! embrace#multimap#CreateMaps(maps_key, solo_var, default_seq, n_cmd, i_cmd, v_cmd) abort
+function! embrace#multimap#CreateMaps(
+  \ maps_key,
+  \ solo_var,
+  \ default_seq,
+  \ n_cmd,
+  \ i_cmd,
+  \ v_cmd,
+\ ) abort
   try
     call s:CreateModeMaps(a:maps_key, a:solo_var, a:default_seq, a:n_cmd, a:i_cmd, a:v_cmd)
   catch
