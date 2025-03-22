@@ -73,7 +73,8 @@ function! s:CreateMaps_WebOpenSearch()
     \ "<Leader>W",
     \ l:n_cmd,
     \ l:i_cmd,
-    \ l:v_cmd)
+    \ l:v_cmd,
+    \ "Google Search Selected Text")
 endfunction
 
 " -------------------------------------------------------------------
@@ -145,7 +146,8 @@ function! s:CreateMaps_WebOpenDefine()
     \ "<Leader>D",
     \ l:n_cmd,
     \ l:i_cmd,
-    \ l:v_cmd)
+    \ l:v_cmd,
+    \ "Google Define Selected Text")
 endfunction
 
 " -------------------------------------------------------------------
@@ -226,7 +228,8 @@ function! s:CreateMaps_WebOpenUrl()
     \ "<Leader>T",
     \ l:n_cmd,
     \ l:i_cmd,
-    \ l:v_cmd)
+    \ l:v_cmd,
+    \ "Browser Open Selected URL")
 endfunction
 
 function! s:CreateMaps_WebOpenUrlGithub()
@@ -240,7 +243,8 @@ function! s:CreateMaps_WebOpenUrlGithub()
     \ "<Leader>og",
     \ l:n_cmd,
     \ l:i_cmd,
-    \ l:v_cmd)
+    \ l:v_cmd,
+    \ "Browser Open GitHub org/proj")
 endfunction
 
 " -------------------------------------------------------------------
@@ -311,7 +315,8 @@ function! s:CreateMaps_WebOpenIncognito()
     \ "<Leader>P",
     \ l:n_cmd,
     \ l:i_cmd,
-    \ l:v_cmd)
+    \ l:v_cmd,
+    \ "Incognito Open Selected URL")
 endfunction
 
 " -------------------------------------------------------------------
