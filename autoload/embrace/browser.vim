@@ -77,7 +77,7 @@ function! s:DefaultBrowser()
     elseif l:handler == "com.googlecode.iterm2"
 
       return ""
-    elseif l:handler == "net.kassett.finicky"
+    elseif l:handler == "se.johnste.finicky" || l:handler == "net.kassett.finicky"
       " https://github.com/johnste/finicky
       " Finicky is used to customize the default browser and options for
       " specific applications and URLs, but Finicky itself doesn't support
