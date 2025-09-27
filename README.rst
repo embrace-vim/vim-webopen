@@ -85,6 +85,7 @@ For example, the default commands (listed above) are configured like this:
     let g:vim_webopen_google_define_seq = "<Leader>D"
     let g:vim_webopen_google_search_seq = "<Leader>W"
     let g:vim_webopen_open_incognito_seq = "<Leader>P"
+    let g:vim_webopen_open_url_github_seq = "<Leader>og"
 
     call g:embrace#webopen#CreateMaps()
 
@@ -152,6 +153,7 @@ visual mode:
       \   "define": "<Leader>D",
       \   "search": "<Leader>W",
       \   "incognito": { "nmap": "g!" },
+      \   "github": "<Leader>og",
 
     call g:embrace#webopen#CreateMaps()
 
@@ -183,6 +185,10 @@ can build the dictionary one key-value at a time.
     let g:vim_webopen_maps.search.vmap = "<Leader>W"
 
     let g:vim_webopen_maps.incognito.nmap = "g!"
+
+    let g:vim_webopen_maps.github.nmap = "<Leader>og"
+    let g:vim_webopen_maps.github.imap = "<Leader>og"
+    let g:vim_webopen_maps.github.vmap = "<Leader>og"
 
     call g:embrace#webopen#CreateMaps()
 
