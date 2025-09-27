@@ -34,13 +34,13 @@ section for customizing or disabling each command map.
 ==============    =========================================================================
 Command           Description
 --------------    -------------------------------------------------------------------------
-``<Leader>T``     Opens a new browser window with the location of the
+``<Leader>U``     Opens a new browser window with the location of the
                   URL under the cursor. Similar to Vim's builtin ``gf``
                   command that opens the file path found under the
                   cursor. Works from normal and insert mode on the
                   URL under the cursor, or from visual mode on the
                   selected text.
-                  (Mnemonic: new Tab)
+                  (Mnemonic: URL)
 --------------    -------------------------------------------------------------------------
 ``<Leader>D``     Opens a browser tab and loads the definition of the
                   word under the cursor (normal or insert mode) or the
@@ -55,11 +55,17 @@ Command           Description
                   if you'd like to make the search engine configurable.)
                   (Mnemonic: Web search)
 --------------    -------------------------------------------------------------------------
-``<Leader>P``     Like ``<Leader>T``, but opens the location in an
+``<Leader>P``     Like ``<Leader>U``, but opens the location in an
                   incognito (aka private) browser window. Works from
                   normal and insert mode on the URL under the cursor,
                   or from visual mode on the selected text.
                   (Mnemonic: Private window)
+--------------    -------------------------------------------------------------------------
+``<Leader>T``     Opens a browser tab to Power Thesaurus synonyms for
+                  the word under the cursor (normal or insert mode) or
+                  the selected text (visual mode). (Please submit a PR
+                  if you'd like to make the thesaurus engine configurable.)
+                  (Mnemonic: Thesaurus)
 ==============    =========================================================================
 
 Command Configuration
@@ -81,11 +87,12 @@ For example, the default commands (listed above) are configured like this:
 
 .. code-block::
 
-    let g:vim_webopen_open_location_seq = "<Leader>T"
+    let g:vim_webopen_open_location_seq = "<Leader>U"
     let g:vim_webopen_google_define_seq = "<Leader>D"
     let g:vim_webopen_google_search_seq = "<Leader>W"
     let g:vim_webopen_open_incognito_seq = "<Leader>P"
     let g:vim_webopen_open_url_github_seq = "<Leader>og"
+    let g:vim_webopen_thesaurus_search_seq = "<Leader>T"
 
     call g:embrace#webopen#CreateMaps()
 
@@ -146,14 +153,15 @@ visual mode:
       \ {
       \   "open":
       \     {
-      \       "nmap": [ "<Leader>T", "gW" ],
-      \       "imap": "<Leader>T",
-      \       "vmap": "<Leader>T",
+      \       "nmap": [ "<Leader>U", "gW" ],
+      \       "imap": "<Leader>U",
+      \       "vmap": "<Leader>U",
       \     },
       \   "define": "<Leader>D",
       \   "search": "<Leader>W",
       \   "incognito": { "nmap": "g!" },
       \   "github": "<Leader>og",
+      \   "thesaurus": "<Leader>T",
 
     call g:embrace#webopen#CreateMaps()
 
@@ -172,9 +180,9 @@ can build the dictionary one key-value at a time.
     let g:vim_webopen_maps.search = {}
     let g:vim_webopen_maps.incognito = {}
 
-    let g:vim_webopen_maps.open.nmap = [ "<Leader>T", "gW" ]
-    let g:vim_webopen_maps.open.imap = "<Leader>T"
-    let g:vim_webopen_maps.open.vmap = "<Leader>T"
+    let g:vim_webopen_maps.open.nmap = [ "<Leader>U", "gW" ]
+    let g:vim_webopen_maps.open.imap = "<Leader>U"
+    let g:vim_webopen_maps.open.vmap = "<Leader>U"
 
     let g:vim_webopen_maps.define.nmap = "<Leader>D"
     let g:vim_webopen_maps.define.imap = "<Leader>D"
@@ -189,6 +197,10 @@ can build the dictionary one key-value at a time.
     let g:vim_webopen_maps.github.nmap = "<Leader>og"
     let g:vim_webopen_maps.github.imap = "<Leader>og"
     let g:vim_webopen_maps.github.vmap = "<Leader>og"
+
+    let g:vim_webopen_maps.thesaurus.nmap = "<Leader>T"
+    let g:vim_webopen_maps.thesaurus.imap = "<Leader>T"
+    let g:vim_webopen_maps.thesaurus.vmap = "<Leader>T"
 
     call g:embrace#webopen#CreateMaps()
 

@@ -166,9 +166,9 @@ endfunction
 "     let g:vim_webopen_maps = {
 "       \   'open':
 "       \   {
-"       \     'nmap': [ '<Leader>T', 'gW' ],
-"       \     'imap': '<Leader>T',
-"       \     'vmap': '<Leader>T',
+"       \     'nmap': [ '<Leader>U', 'gW' ],
+"       \     'imap': '<Leader>U',
+"       \     'vmap': '<Leader>U',
 "       \   },
 "       ...
 "
@@ -176,13 +176,13 @@ endfunction
 "   three modes, e.g.,
 "
 "     let g:vim_webopen_maps = {
-"       \   'open': '<Leader>T',
+"       \   'open': '<Leader>U',
 "       ...
 "
 " - Alternatively, if g:vim_webopen_maps["open"] is not defined,
 "   you can use g:vim_webopen_open_url_seq instead, e.g.,
 "
-"     let g:vim_webopen_open_url_seq = '<Leader>T'
+"     let g:vim_webopen_open_url_seq = '<Leader>U'
 "
 "   and that sequence will be used to create maps for each of the
 "   three modes, normal, insert, and visual.
@@ -195,7 +195,7 @@ endfunction
 "   nor g:vim_webopen_open_url_seq is defined, and if
 "   the sequence is not already mapped, defaults to:
 "
-"     <Leader>T
+"     <Leader>U
 
 " ALTLY: We could call `sensible-browser` or `sensible-open` instead,
 "        but we'll use embrace#browser#WebOpenUrl for portability.
@@ -203,17 +203,17 @@ endfunction
 "   “ Note that we must escape the shell command argument, e.g., if you select this URL:
 "   “   http://example.com/#foo
 "   “ a simple mapping like:
-"   “   vnoremap <Leader>T y:!sensible-browser '<C-R>"'<CR>
+"   “   vnoremap <Leader>U y:!sensible-browser '<C-R>"'<CR>
 "   “ will fail on the pound sign/octothorpe/hash symbol, complaining
 "   “   E499: Empty file name for '%' or '#', only works with ':p:h'
 "   if executable("sensible-browser")
 "     “ Linux (or at least Debian) built-in.
-"     vnoremap <silent> <Leader>T y:execute '!sensible-browser ' .. shellescape('<C-R>"', 1)<CR>
+"     vnoremap <silent> <Leader>U y:execute '!sensible-browser ' .. shellescape('<C-R>"', 1)<CR>
 "   elseif executable("sensible-open")
 "     “ https://github.com/landonb/sh-sensible-open#☔
-"     vnoremap <silent> <Leader>T y:execute '!sensible-open ' .. shellescape('<C-R>"', 1)<CR>
+"     vnoremap <silent> <Leader>U y:execute '!sensible-open ' .. shellescape('<C-R>"', 1)<CR>
 "   else
-"     vnoremap <silent> <Leader>T y:call g:embrace#browser#WebOpenUrl('<C-r>"', 0)<CR>
+"     vnoremap <silent> <Leader>U y:call g:embrace#browser#WebOpenUrl('<C-r>"', 0)<CR>
 "   endif
 
 function! s:CreateMaps_WebOpenUrl()
@@ -221,11 +221,11 @@ function! s:CreateMaps_WebOpenUrl()
   let l:i_cmd = "<C-O>" .. n_cmd
   let l:v_cmd = "y:call g:embrace#browser#WebOpenUrl('<C-r>\"', 0)<CR>"
 
-  " Traditional default: <Leader>T opens URL under cursor/selected.
+  " Traditional default: <Leader>U opens URL under cursor/selected.
   call g:embrace#multimap#CreateMaps(
     \ "open",
     \ "vim_webopen_open_url_seq",
-    \ "<Leader>T",
+    \ "<Leader>U",
     \ l:n_cmd,
     \ l:i_cmd,
     \ l:v_cmd,
@@ -245,6 +245,29 @@ function! s:CreateMaps_WebOpenUrlGithub()
     \ l:i_cmd,
     \ l:v_cmd,
     \ "Browser Open GitHub org/proj")
+endfunction
+
+" Opens, e.g., https://www.powerthesaurus.org/foo/synonyms
+" - CALSO: Similar to:
+"   s:CreateMaps_WebOpenSearch
+"   s:CreateMaps_WebOpenDefine
+function! s:CreateMaps_WebOpenPowerThesaurus()
+  let l:n_cmd = ":call g:embrace#browser#WebOpenUrl('https://www.powerthesaurus.org/<C-R><C-W>/synonyms', 0)<CR>"
+  let l:i_cmd = "<C-O>" .. n_cmd
+  " SAVVY: See comments above re: <C-U>, gv, y, <C-R>".
+  let l:v_cmd =
+    \ ":<C-U>" ..
+    \ "<CR>gvy" ..
+    \ ":<C-U>call g:embrace#browser#WebOpenUrl('https://www.powerthesaurus.org/<C-R>\"/synonyms', 0)<CR>"
+
+  call g:embrace#multimap#CreateMaps(
+    \ "thesaurus",
+    \ "vim_webopen_thesaurus_search_seq",
+    \ "<Leader>T",
+    \ l:n_cmd,
+    \ l:i_cmd,
+    \ l:v_cmd,
+    \ "Browser Open Power Thesaurus")
 endfunction
 
 " -------------------------------------------------------------------
@@ -336,11 +359,11 @@ function! g:embrace#webopen#CreateMaps() abort
   " Open URL under cursor/selected in browser.
   " - USAGE: E.g. (mnemonic: "open browser _T_ab"):
   "     " For normal, insert, and visual modes:
-  "     let g:vim_webopen_open_url_seq = "<Leader>T"
+  "     let g:vim_webopen_open_url_seq = "<Leader>U"
   "     " For select modes:
-  "     let g:vim_webopen_maps.open.nmap = "<Leader>T"
-  "     let g:vim_webopen_maps.open.imap = "<Leader>T"
-  "     let g:vim_webopen_maps.open.vmap = "<Leader>T"
+  "     let g:vim_webopen_maps.open.nmap = "<Leader>U"
+  "     let g:vim_webopen_maps.open.imap = "<Leader>U"
+  "     let g:vim_webopen_maps.open.vmap = "<Leader>U"
   call s:CreateMaps_WebOpenUrl()
 
   " Run Google define on term under cursor/selected.
@@ -374,6 +397,8 @@ function! g:embrace#webopen#CreateMaps() abort
   call s:CreateMaps_WebOpenIncognito()
 
   call s:CreateMaps_WebOpenUrlGithub()
+
+  call s:CreateMaps_WebOpenPowerThesaurus()
 endfunction
 
 " USAGE: Set g:vim_webopen_* variable(s) to your liking, then
