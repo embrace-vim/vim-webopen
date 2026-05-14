@@ -210,7 +210,7 @@ endfunction
 "     “ Linux (or at least Debian) built-in.
 "     vnoremap <silent> <Leader>U y:execute '!sensible-browser ' .. shellescape('<C-R>"', 1)<CR>
 "   elseif executable("sensible-open")
-"     “ https://github.com/landonb/sh-sensible-open#☔
+"     “ https://github.com/landonb/sh-sensible-open#🪂
 "     vnoremap <silent> <Leader>U y:execute '!sensible-open ' .. shellescape('<C-R>"', 1)<CR>
 "   else
 "     vnoremap <silent> <Leader>U y:call g:embrace#browser#WebOpenUrl('<C-r>"', 0)<CR>

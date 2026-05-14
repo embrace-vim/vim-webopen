@@ -383,7 +383,7 @@ endfunction
 " -------------------------------------------------------------------
 
 " MEH/2021-01-28: I ported previous macOS browser functionality to a new
-" shell project, found at https://github.com/landonb/sh-sensible-open#☔
+" shell project, found at https://github.com/landonb/sh-sensible-open#🪂
 " but I'd rather not force plugin users to have to install that command.
 " So rather than DRY this code (the functionality is the same, although
 " one is Vim and the other is a POSIX command script), we'll keep both

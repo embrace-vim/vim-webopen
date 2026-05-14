@@ -6,7 +6,7 @@
 
 # 2021-01-28: SNYC_ME: See related functionality (POSIX script):
 #
-#   https://github.com/landonb/sh-sensible-open#☔
+#   https://github.com/landonb/sh-sensible-open#🪂
 
 macOS_which_browser () {
   # CXREF: ~/Library/Preferences/com.apple.LaunchServices/com.apple.launchservices.secure.plist
